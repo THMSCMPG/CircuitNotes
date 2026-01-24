@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CircuitNotes | Reference Library</title>
+    <title>CircuitNotes | Hardware Reference Library</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
     <nav class="navbar">
         <div class="container">
-            <a href="index.html" class="logo"><i class="fas fa-microchip"></i> CircuitNotes</a>
+            <a href="index.html" class="logo"><i class="fas fa-bolt-lightning"></i> CircuitNotes</a>
             <ul class="nav-links">
-                <li><a href="#demos">Demos</a></li>
-                <li><a href="https://github.com/THMSCMPG/CircuitNotes">GitHub</a></li>
+                <li><a href="#library">Library</a></li>
+                <li><a href="master-reference.html">Master Ref</a></li>
+                <li><a href="https://github.com/THMSCMPG/CircuitNotes"><i class="fab fa-github"></i> GitHub</a></li>
             </ul>
         </div>
     </nav>
@@ -22,54 +23,67 @@
     <header class="hero">
         <div class="container">
             <h1>Master Your Electronics</h1>
-            <p>A comprehensive documentation library for basic 5V circuits and component integration.</p>
+            <p>A comprehensive collection of 5V DC circuit demonstrations, theory, and professional documentation for makers.</p>
+            
             <div class="stats-bar">
                 <div class="stat-item"><strong>22+</strong><span>Demos</span></div>
-                <div class="stat-item"><strong>8</strong><span>Basic 5V Circuits</span></div>
-                <div class="stat-item"><strong>14+</strong><span>Component Guides</span></div>
+                <div class="stat-item"><strong>9</strong><span>Component Types</span></div>
+                <div class="stat-item"><strong>100%</strong><span>Custom Code</span></div>
             </div>
         </div>
     </header>
 
-    <main class="container">
-        <section id="demos">
-            <h2 class="section-title">Documentation Library</h2>
-            
-            <div class="demo-grid">
-                <div class="category-card">
-                    <h3><i class="fas fa-bolt"></i> Basic 5V Circuits</h3>
-                    <div class="link-group">
-                        <a href="docs/basic-5v-1.html" class="btn-link">Simple LED Circuit</a>
-                        <a href="docs/basic-5v-2.html" class="btn-link">Series Resistance</a>
-                        <a href="#" class="btn-link">Voltage Dividers</a>
-                        <a href="#" class="btn-link">Switch Controls</a>
-                    </div>
-                </div>
-
-                <div class="category-card">
-                    <h3><i class="fas fa-project-diagram"></i> Component Demos</h3>
-                    <div class="link-group">
-                        <a href="docs/component-led.html" class="btn-link">RGB LED Control</a>
-                        <a href="#" class="btn-link">Potentiometers</a>
-                        <a href="#" class="btn-link">Servo Motors</a>
-                        <a href="#" class="btn-link">LDR Sensors</a>
-                    </div>
-                </div>
-
-                <div class="category-card">
-                    <h3><i class="fas fa-book"></i> Theory & Master Ref</h3>
-                    <div class="link-group">
-                        <a href="#" class="btn-link">Ohm's Law Guide</a>
-                        <a href="#" class="btn-link">Master Pinout Ref</a>
-                        <a href="#" class="btn-link">Code Snippets</a>
-                    </div>
+    <main class="container" id="library">
+        <h2 class="section-title">Documentation Library</h2>
+        
+        <div class="demo-grid">
+            <div class="category-card">
+                <h3><i class="fas fa-microchip"></i> Fundamentals</h3>
+                <div class="link-group">
+                    <a href="basic-5v-circuits.html" class="btn-link">Basic 5V DC (8 Demos)</a>
+                    <a href="master-reference.html" class="btn-link">Master Theory Reference</a>
                 </div>
             </div>
-        </section>
+
+            <div class="category-card">
+                <h3><i class="fas fa-lightbulb"></i> Lighting & LEDs</h3>
+                <div class="link-group">
+                    <a href="led-demos.html" class="btn-link">Standard LED Demos</a>
+                    <a href="rgb-led-demos.html" class="btn-link">RGB LED Control</a>
+                </div>
+            </div>
+
+            <div class="category-card">
+                <h3><i class="fas fa-gauge-high"></i> Sensors & Inputs</h3>
+                <div class="link-group">
+                    <a href="photoresistor-demos.html" class="btn-link">Photoresistors (LDR)</a>
+                    <a href="rotary-encoder-demos.html" class="btn-link">Rotary Encoders</a>
+                    <a href="matrix-keypad-theory.html" class="btn-link">Matrix Keypads</a>
+                </div>
+            </div>
+
+            <div class="category-card">
+                <h3><i class="fas fa-tv"></i> Output Modules</h3>
+                <div class="link-group">
+                    <a href="oled-buzzer-theory.html" class="btn-link">OLED & Passive Buzzers</a>
+                    <a href="seven-segment-dip.html" class="btn-link">7-Segment & DIP Switches</a>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Quick Links</h2>
+        <div class="demo-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+            <a href="master-reference.html" class="btn-link">Ohm's Law Guide</a>
+            <a href="master-reference.html" class="btn-link">Pin Layouts</a>
+            <a href="https://github.com/THMSCMPG/CircuitNotes/issues" class="btn-link">Report Issue</a>
+        </div>
     </main>
 
     <footer class="footer">
-        <p>&copy; 2024 CircuitNotes Project | Built for THMSCMPG</p>
+        <div class="container">
+            <p>&copy; 2026 CircuitNotes Project | Built for the Arduino Community</p>
+            <p style="font-size: 0.8rem; margin-top: 10px;">Created by THMSCMPG</p>
+        </div>
     </footer>
 
 </body>
