@@ -20,7 +20,27 @@ th {background: #34495e; color: white;}
 </style>
 </head>
 <body>
+<nav class="doc-nav">
+    <div class="nav-container">
+        <a href="index.html" class="home-btn"><i class="fas fa-house"></i> Home</a>
 
+        <div class="dropdown-wrapper">
+            <label for="page-select">Jump to:</label>
+            <select id="page-select" onchange="window.location.href=this.value;">
+                <option value="" disabled selected>Select a Document</option>
+                <option value="basic-5v-circuits.html">Basic 5V DC Circuits</option>
+                <option value="led-demos.html">Standard LED Demos</option>
+                <option value="rgb-led-demos.html">RGB LED Control</option>
+                <option value="photoresistor-demos.html">Photoresistors (LDR)</option>
+                <option value="rotary-encoder-demos.html">Rotary Encoders</option>
+                <option value="matrix-keypad-theory.html">Matrix Keypads</option>
+                <option value="oled-buzzer-theory.html">OLED & Buzzers</option>
+                <option value="seven-segment-dip.html">7-Segment & DIP</option>
+                <option value="master-reference.html">Master Reference</option>
+            </select>
+        </div>
+    </div>
+</nav>
 <h1>☀️ Photoresistor (LDR) Circuit Demonstrations</h1>
 
 <div class="demo-section">
