@@ -65,4 +65,70 @@ body {
 .btn-link:hover { background: white; border-color: var(--primary); color: var(--primary); padding-left: 20px; }
 .btn-link:hover:after { opacity: 1; }
 
+.doc-nav {
+    background: #1e293b;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 3px solid #10b981;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.home-btn {
+    background: #10b981;
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.home-btn:hover {
+    background: #059669;
+}
+
+.dropdown-wrapper {
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#page-select {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #475569;
+    background: #334155;
+    color: white;
+    cursor: pointer;
+}
+
+.download-btn {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    color: #1e293b;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.download-btn:hover {
+    background: #e2e8f0;
+}
+
 .footer { text-align: center; padding: 60px 0; border-top: 1px solid var(--border); color: var(--text-light); font-size: 0.9rem; }
