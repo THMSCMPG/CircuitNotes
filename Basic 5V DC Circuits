@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Basic 5V DC Circuits</title>
+<style>
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #f5f5f5;
+  line-height: 1.6;
+}
+.demo-section {
+  background: white;
+  padding: 25px;
+  margin: 20px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+h1 {
+  color: #2c3e50;
+  border-bottom: 3px solid #27ae60;
+  padding-bottom: 10px;
+  text-align: center;
+}
+h2 {
+  color: #34495e;
+  margin-top: 0;
+  background: #ecf0f1;
+  padding: 10px;
+  border-left: 5px solid #27ae60;
+}
+h3 {
+  color: #16a085;
+}
+.circuit-diagram {
+  background: #2c3e50;
+  color: #ecf0f1;
+  padding: 20px;
+  border-radius: 5px;
+  font-family: 'Courier New', monospace;
+  margin: 15px 0;
+  overflow-x: auto;
+  white-space: pre;
+  font-size: 14px;
+}
+.theory-box {
+  background: #e8f4f8;
+  padding: 15px;
+  border-left: 4px solid #3498db;
+  margin: 15px 0;
+}
+.math-box {
+  background: #fef5e7;
+  padding: 15px;
+  border-left: 4px solid #f39c12;
+  margin: 15px 0;
+  font-family: 'Courier New', monospace;
+}
+.materials-box {
+  background: #d5f4e6;
+  padding: 15px;
+  border-left: 4px solid #27ae60;
+  margin: 15px 0;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px 0;
+}
+th, td {
+  border: 1px solid #bdc3c7;
+  padding: 10px;
+  text-align: left;
+}
+th {
+  background: #34495e;
+  color: white;
+}
+.warning {
+  background: #ffe6e6;
+  padding: 10px;
+  border-left: 4px solid #e74c3c;
+  margin: 10px 0;
+}
+.highlight {
+  background: #fff9e6;
+  padding: 10px;
+  border-left: 4px solid #f39c12;
+  margin: 10px 0;
+}
+</style>
+</head>
+<body>
+
+<h1>⚡ Basic 5V DC Circuit Demonstrations</h1>
+<div style="text-align: center; color: #7f8c8d; margin-bottom: 30px;">
+  <strong>Using Arduino as a Simple 5V DC Power Source</strong><br>
+  No programming logic required - just constant voltage output
+</div>
+
+<div class="demo-section">
+<h2>Circuit 1: Simple LED Circuit (Ohm's Law Demonstration)</h2>
+
+<div class="circuit-diagram">
+Arduino 5V Pin ----[220Ω Resistor]----[LED]---|>|---- GND
+
+Component Layout:
+        ┌─────────────────┐
+        │   ARDUINO UNO   │
+        │                 │
+    ┌───┤ 5V              │
+    │   │                 │
+    │   │            GND  ├───┐
+    │   └─────────────────┘   │
+    │                         │
+   [R]  220Ω                  │
+    │                         │
+    │   ┌───┐                 │
+    └───┤ + │ LED (Red)       │
+        └─┬─┘                 │
+          │                   │
+          └───────────────────┘
+</div>
+
+<div class="materials-box">
+<strong>Materials Needed:</strong>
+<ul>
+<li>1× Red LED</li>
+<li>1× 220Ω resistor</li>
+<li>2× Jumper wires</li>
+</ul>
+</div>
+
+<div class="theory-box">
+<strong>Physics Principle: Ohm's Law</strong><br>
+This circuit demonstrates the fundamental relationship between voltage, current, and resistance:<br>
+<strong>V = I × R</strong>
+
+<br><br>The LED is a diode that emits light when forward-biased. It has a forward voltage drop (Vf) that depends on the semiconductor material and color.
+</div>
+
+<div class="math-box">
+<strong>Calculations:</strong>
+
+Given:
+  Vsupply = 5V (Arduino output)
+  Vf (red LED) = 2.0V
+  Desired If = 15mA = 0.015A
+
+Step 1: Voltage across resistor
+  VR = Vsupply - Vf
+  VR = 5V - 2.0V = 3.0V
+
+Step 2: Required resistance (Ohm's Law)
+  R = VR / If
+  R = 3.0V / 0.015A
+  R = 200Ω
+
+Step 3: Use standard value
+  R = 220Ω (closest standard value)
+
+Step 4: Actual current
+  I = VR / R = 3.0V / 220Ω = 13.6mA ✓
+
+Step 5: Power dissipation
+  PR = I² × R = (0.0136)² × 220 = 0.041W = 41mW
+  (Well under 1/4W resistor rating)
+</div>
+
+<h3>Observations & Learning Points</h3>
+<ul>
+<li>LED brightness is proportional to current (not voltage)</li>
+<li>Without resistor, excessive current would destroy LED instantly</li>
+<li>Different LED colors require different resistor values</li>
+<li>This is a series circuit - same current flows through all components</li>
+</ul>
+
+<table>
+<tr><th>LED Color</th><th>Vf (Typical)</th><th>Recommended R (5V)</th><th>Current</th></tr>
+<tr><td>Red</td><td>2.0V</td><td>220Ω</td><td>13.6mA</td></tr>
+<tr><td>Yellow</td><td>2.1V</td><td>220Ω</td><td>13.2mA</td></tr>
+<tr><td>Green</td><td>2.2V</td><td>220Ω</td><td>12.7mA</td></tr>
+<tr><td>Blue</td><td>3.2V</td><td>100Ω</td><td>18mA</td></tr>
+<tr><td>White</td><td>3.4V</td><td>100Ω</td><td>16mA</td></tr>
+</table>
+</div>
+
+<div class="demo-section">
+<h2>Circuit 2: Series LED Circuit (Voltage Division)</h2>
+
+<div class="circuit-diagram">
+Arduino 5V ----[100Ω]----[LED1]---|>|----[LED2]---|>|---- GND
+
+Component Layout:
+        ┌─────────────────┐
+        │   ARDUINO UNO   │
+        │                 │
+    ┌───┤ 5V              │
+    │   │                 │
+    │   │            GND  ├─────────────┐
+    │   └─────────────────┘             │
+    │                                   │
+   [R]  100Ω                            │
+    │                                   │
+    │   ┌───┐                           │
+    ├───┤ + │ LED1 (Red)                │
+    │   └─┬─┘                           │
+    │     │                             │
+    │   ┌─┴─┐                           │
+    └───┤ + │ LED2 (Red)                │
+        └─┬─┘                           │
+          │                             │
+          └─────────────────────────────┘
+</div>
+
+<div class="materials-box">
+<strong>Materials Needed:</strong>
+<ul>
+<li>2× Red LEDs</li>
+<li>1× 100Ω resistor</li>
+<li>2× Jumper wires</li>
+</ul>
+</div>
+
+<div class="theory-box">
+<strong>Physics Principle: Kirchhoff's Voltage Law (KVL)</strong><br>
+In a series circuit, the sum of all voltage drops equals the supply voltage:<br>
+<strong>Vsupply = VR + Vf1 + Vf2</strong>
+
+<br><br>All components carry the same current (series circuit property).
+</div>
+
+<div class="math-box">
+<strong>Calculations:</strong>
+
+Given:
+  Vsupply = 5V
+  Vf1 = Vf2 = 2.0V (red LEDs)
+  Desired I = 15mA = 0.015A
+
+Step 1: Total voltage drop across LEDs
+  VLED_total = Vf1 + Vf2
+  VLED_total = 2.0V + 2.0V = 4.0V
+
+Step 2: Voltage across resistor
+  VR = Vsupply - VLED_total
+  VR = 5V - 4.0V = 1.0V
+
+Step 3: Required resistance
+  R = VR / I
+  R = 1.0V / 0.015A = 67Ω
+
+Step 4: Use standard value
+  R = 100Ω (provides safety margin)
+
+Step 5: Actual current
+  I = VR / R = 1.0V / 100Ω = 10mA
+  (Slightly dimmer but safer)
+</div>
+
+<h3>Why This Works</h3>
+<ul>
+<li>Two 2V LEDs in series = 4V total drop</li>
+<li>5V supply - 4V LEDs = 1V remaining for resistor</li>
+<li>More efficient than parallel LEDs (uses less total current)</li>
+<li>All LEDs guaranteed equal brightness (same current)</li>
+</ul>
+
+<div class="warning">
+<strong>⚠️ Important:</strong> With 5V supply, you can put maximum 2 red LEDs in series (3 would need 6V). Blue/white LEDs won't work in series with 5V (would need 6.4V+).
+</div>
+</div>
+
+<div class="demo-section">
+<h2>Circuit 3: Parallel LED Circuit (Current Division)</h2>
+
+<div class="circuit-diagram">
+              ┌────[220Ω]────[LED1]---|>|────┐
+              │                            │
+Arduino 5V ───┼────[220Ω]────[LED2]---|>|────┼─── GND
+              │                            │
+              └────[220Ω]────[LED3]---|>|────┘
+
+Component Layout:
+        ┌─────────────────┐
+        │   ARDUINO UNO   │
+        │                 │
+    ┌───┤ 5V              │
+    │   │                 │
+    │   │            GND  ├─────────────┐
+    │   └─────────────────┘             │
+    │                                   │
+    ├──[R1]─[LED1]──────────────────────┤
+    │   220Ω                            │
+    │                                   │
+    ├──[R2]─[LED2]──────────────────────┤
+    │   220Ω                            │
+    │                                   │
+    └──[R3]─[LED3]──────────────────────┘
+        220Ω
+</div>
+
+<div class="materials-box">
+<strong>Materials Needed:</strong>
+<ul>
+<li>3× Red LEDs</li>
+<li>3× 220Ω resistors</li>
+<li>Multiple jumper wires</li>
+</ul>
+</div>
+
+<div class="theory-box">
+<strong>Physics Principle: Kirchhoff's Current Law (KCL)</strong><br>
+In a parallel circuit, total current is the sum of all branch currents:<br>
+<strong>Itotal = I1 + I2 + I3</strong>
+
+<br><br>All parallel branches see the same voltage (5V in this case).
+</div>
+
+<div class="math-box">
+<strong>Calculations:</strong>
+
+Each LED branch is independent:
+  Per branch: VR = 5V - 2.0V = 3.0V
+  Per branch: I = 3.0V / 220Ω = 13.6mA
+
+Total current from Arduino:
+  Itotal = 3 × 13.6mA = 40.8mA
+
+Power from Arduino 5V pin:
+  P = V × I = 5V × 0.041A = 0.205W
+
+Arduino 5V pin can supply ~500mA, so this is safe.
+</div>
+
+<h3>Advantages of Parallel Configuration</h3>
+<ul>
+<li>Each LED can be a different color (use appropriate resistor for each)</li>
+<li>If one LED fails open, others continue working</li>
+<li>Easy to add/remove LEDs without affecting others</li>
+<li>Each LED gets full brightness</li>
+</ul>
+
+<h3>How Many LEDs Can You Power?</h3>
+<div class="math-box">
+Maximum from 5V pin ≈ 500mA (conservative)
+Current per LED ≈ 13.6mA
+Maximum LEDs = 500mA / 13.6mA ≈ 36 LEDs
+
+Practical limit: 20-25 LEDs (leaves safety margin)
+</div>
+</div>
+
+<div class="demo-section">
+<h2>Circuit 4: Voltage Divider (Resistor Network)</h2>
+
+<div class="circuit-diagram">
+Arduino 5V ────┬────── Measurement Point A (5V)
+               │
+              [R1] 10kΩ
+               │
+               ├────── Measurement Point B (2.5V)
+               │
+              [R2] 10kΩ
+               │
+GND ───────────┴────── Measurement Point C (0V)
+</div>
+
+<div class="materials-box">
+<strong>Materials Needed:</strong>
+<ul>
+<li>2× 10kΩ resistors</li>
+<li>Multimeter (to measure voltages)</li>
+<li>Jumper wires</li>
+</ul>
+</div>
+
+<div class="theory-box">
+<strong>Physics Principle: Voltage Divider Rule</strong><br>
+The voltage divider is one of the most fundamental circuits in electronics:<br>
+<strong>Vout = Vin × (R2 / (R1 + R2))</strong>
+
+<br><br>This circuit creates a reference voltage lower than the supply voltage without using a regulator.
+</div>
+
+<div class="math-box">
+<strong>Calculations:</strong>
+
+Configuration 1: Equal resistors (50% division)
+  R1 = R2 = 10kΩ
+  Vout = 5V × (10kΩ / (10kΩ + 10kΩ))
+  Vout = 5V × 0.5 = 2.5V
+
+Configuration 2: 1/3 voltage (use R1=20kΩ, R2=10kΩ)
+  Vout = 5V × (10kΩ / (20kΩ + 10kΩ))
+  Vout = 5V × 0.333 = 1.67V
+
+Configuration 3: 3/4 voltage (use R1=10kΩ, R2=30kΩ)
+  Vout = 5V × (30kΩ / (10kΩ + 30kΩ))
+  Vout = 5V × 0.75 = 3.75V
+
+Current through divider:
+  I = 5V / (R1 + R2) = 5V / 20kΩ = 0.25mA
+  (Very low power consumption)
+</div>
+
+<h3>Practical Applications</h3>
+<ul>
+<li>Creating reference voltages for analog circuits</li>
+<li>Scaling down voltages for measurement</li>
+<li>Bias networks for transistors</li>
+<li>Level shifting between different voltage systems</li>
+</ul>
+
+<div class="highlight">
+<strong>💡 Experiment:</strong> Try different resistor combinations and measure Vout with a multimeter. Verify your calculations!
+</div>
+
+<table>
+<tr><th>R1</th><th>R2</th><th>Vout (calculated)</th><th>Voltage Ratio</th></tr>
+<tr><td>10kΩ</td><td>10kΩ</td><td>2.5V</td><td>1/2</td></tr>
+<tr><td>20kΩ</td><td>10kΩ</td><td>1.67V</td><td>1/3</td></tr>
+<tr><td>10kΩ</td><td>30kΩ</td><td>3.75V</td><td>3/4</td></tr>
+<tr><td>1kΩ</td><td>1kΩ</td><td>2.5V</td><td>1/2</td></tr>
+<tr><td>100kΩ</td><td>100kΩ</td><td>2.5V</td><td>1/2</td></tr>
+</table>
+</div>
+
+<div class="demo-section">
+<h2>Circuit 5: LED Brightness Levels (Manual PWM)</h2>
+
+<div class="circuit-diagram">
+Configuration A: Full Brightness (Direct)
+Arduino 5V ────[220Ω]────[LED]---|>|──── GND
+Current: 13.6mA (100% brightness)
+
+Configuration B: 50% Brightness (Series Resistors)
+Arduino 5V ────[220Ω]────[220Ω]────[LED]---|>|──── GND
+Current: 6.8mA (≈50% brightness)
+
+Configuration C: 33% Brightness (More Resistance)
+Arduino 5V ────[220Ω]────[220Ω]────[220Ω]────[LED]---|>|──── GND
+Current: 4.5mA (≈33% brightness)
+</div>
+
+<div class="materials-box">
+<strong>Materials Needed:</strong>
+<ul>
+<li>1× Red LED</li>
+<li>3× 220Ω resistors</li>
+<li>Jumper wires</li>
+</ul>
+</div>
+
+<div class="theory-box">
+<strong>Physics Principle: LED Brightness vs Current</strong><br>
+LED brightness is approximately proportional to forward current (in the normal operating range). By increasing resistance, we reduce current and therefore brightness.
+
+<br><br><strong>Luminous Intensity ∝ Forward Current</strong><br>
+(Relationship is roughly linear from 5mA to 20mA)
+</div>
+
+<div class="math-box">
+<strong>Calculations for Each Configuration:</strong>
+
+Configuration A (220Ω total):
+  VR = 5V - 2.0V = 3.0V
+  I = 3.0V / 220Ω = 13.6mA
+  Relative brightness: 100%
+
+Configuration B (440Ω total):
+  VR = 5V - 2.0V = 3.0V
+  I = 3.0V / 440Ω = 6.8mA
+  Relative brightness: 50%
+
+Configuration C (660Ω total):
+  VR = 5V - 2.0V = 3.0V
+  I = 3.0V / 660Ω = 4.5mA
+  Relative brightness: 33%
+
+Configuration D (1kΩ total - very dim):
+  I = 3.0V / 1000Ω = 3.0mA
+  Relative brightness: 22%
+</div>
+
+<h3>Observations</h3>
+<ul>
+<li>Brightness changes are visible but not perfectly proportional to current</li>
+<li>Human eye has logarithmic response to light intensity</li>
+<li>Very low currents (< 2mA) may appear off in bright environments</li>
+<li>This demonstrates why PWM is preferred for smooth dimming</li>
+</ul>
+</div>
+
+<div class="demo-section">
+<h2>Circuit 6: RC Time Constant Demonstration</h2>
+
+<div class="circuit-diagram">
+Arduino 5V ────┬──────────── Vout (measure with multimeter)
+               │
+              [R] 10kΩ
+               │
+               ├──────────── Voltage rises exponentially
+               │
+              [C] 100µF
+               │
+GND ───────────┴
+
+Charging Curve:
+V(t) = Vmax × (1 - e^(-t/RC))
+
+5V ┤            _______________  ← 99% charged (5τ)
+   │         ___╱
+   │      __╱      ← 63% charged (1τ)
+   │   __╱
+   │__╱
+0V └────────────────────────> time
+   0    1τ   2τ   3τ   4τ   5τ
+</div>
+
+<div class="materials-box">
+<strong>Materials Needed:</strong>
+<ul>
+<li>1× 10kΩ resistor</li>
+<li>1× 100µF electrolytic capacitor</li>
+<li>Multimeter</li>
+<li>Jumper wires</li>
+</ul>
+
+<div class="warning">
+<strong>⚠️ Polarity Warning:</strong> Electrolytic capacitors have polarity! Connect the negative lead (marked with stripe) to GND, positive lead to the circuit. Reverse polarity can cause the capacitor to explode!
+</div>
+</div>
+
+<div class="theory-box">
+<strong>Physics Principle: Exponential Charging</strong><br>
+When a capacitor charges through a resistor, the voltage rises exponentially according to:<br>
+<strong>V(t) = Vmax × (1 - e^(-t/τ))</strong>
+
+<br><br>Where τ (tau) is the time constant:<br>
+<strong>τ = R × C</strong>
+
+<br><br>The capacitor stores energy in an electric field between its plates. As it charges, the voltage across it increases, reducing the charging current (following Ohm's Law).
+</div>
+
+<div class="math-box">
+<strong>Calculations:</strong>
+
+Time constant:
+  τ = R × C
+  τ = 10,000Ω × 0.0001F
+  τ = 1 second
+
+Voltage at specific times:
+  At t = 0s:  V = 5V × (1 - e^0) = 0V
+  At t = 1s:  V = 5V × (1 - e^-1) = 3.16V (63%)
+  At t = 2s:  V = 5V × (1 - e^-2) = 4.32V (86%)
+  At t = 3s:  V = 5V × (1 - e^-3) = 4.75V (95%)
+  At t = 5s:  V = 5V × (1 - e^-5) = 4.97V (99%)
+
+Rule of thumb: Fully charged after 5τ = 5 seconds
+
+Energy stored when fully charged:
+  E = ½CV² = ½ × 100µF × (5V)²
+  E = 0.00125 Joules = 1.25 mJ
+</div>
+
+<h3>Experiment Procedure</h3>
+<ol>
+<li>Start with capacitor discharged (short leads together briefly)</li>
+<li>Connect circuit with 5V from Arduino</li>
+<li>Watch multimeter voltage rise from 0V to 5V</li>
+<li>Note time to reach 3.16V (should be ≈1 second)</li>
+<li>Note time to reach ~5V (should be ≈5 seconds)</li>
+</ol>
+
+<h3>Try Different Values</h3>
+<table>
+<tr><th>R</th><th>C</th><th>τ (Time Constant)</th><th>Full Charge Time</th></tr>
+<tr><td>1kΩ</td><td>100µF</td><td>0.1s</td><td>0.5s</td></tr>
+<tr><td>10kΩ</td><td>100µF</td><td>1.0s</td><td>5s</td></tr>
+<tr><td>100kΩ</td><td>100µF</td><td>10s</td><td>50s</td></tr>
+<tr><td>10kΩ</td><td>10µF</td><td>0.1s</td><td>0.5s</td></tr>
+</table>
+
+<h3>Real-World Applications</h3>
+<ul>
+<li>Timing circuits (delay before action)</li>
+<li>Filter circuits (smoothing power supplies)</li>
+<li>Oscillators (555 timer circuits)</li>
+<li>Flash photography (energy storage)</li>
+<li>Debouncing switches</li>
+</ul>
+</div>
+
+<div class="demo-section">
+<h2>Circuit 7: Resistor Color Code Practice Board</h2>
+
+<div class="circuit-diagram">
+                ┌──[R1]──[LED1]──┐
+                │                │
+                ├──[R2]──[LED2]──┤
+Arduino 5V ─────┼──[R3]──[LED3]──┼──── GND
+                ├──[R4]──[LED4]──┤
+                │                │
+                └──[R5]──[LED5]──┘
+
+Where R1-R5 are different values:
+  R1 = 220Ω  (Red-Red-Brown)
+  R2 = 1kΩ   (Brown-Black-Red)
+  R3 = 10kΩ  (Brown-Black-Orange)
+  R4 = 100Ω  (Brown-Black-Brown)
+  R5 = 470Ω  (Yellow-Violet-Brown)
+</div>
+
+<div class="materials-box">
+<strong>Materials Needed:</strong>
+<ul>
+<li>5× LEDs (same color, e.g., all red)</li>
+<li>1× 220Ω resistor</li>
+<li>1× 1kΩ resistor</li>
+<li>1× 10kΩ resistor</li>
+<li>1× 100Ω resistor</li>
+<li>1× 470Ω resistor</li>
+<li>Jumper wires</li>
+</ul>
+</div>
+
+<div class="theory-box">
+<strong>Learning Objective: Resistor Color Code Reading</strong><br>
+This circuit creates visible brightness differences based on resistor values, helping you learn to identify resistors by their color bands.
+
+<br><br><strong>Color Code System:</strong><br>
+Band 1 & 2: Significant digits<br>
+Band 3: Multiplier (×10^n)<br>
+Band 4: Tolerance (Gold = ±5%, Silver = ±10%)
+</div>
+
+<div class="math-box">
+<strong>Expected Brightness (all with red LEDs, Vf=2.0V):</strong>
+
+R1 = 100Ω:
+  I = 3.0V / 100Ω = 30mA (Very bright - at LED max!)
+
+R2 = 220Ω:
+  I = 3.0V / 220Ω = 13.6mA (Bright - recommended)
+
+R3 = 470Ω:
+  I = 3.0V / 470Ω = 6.4mA (Medium)
+
+R4 = 1kΩ:
+  I = 3.0V / 1000Ω = 3.0mA (Dim)
+
+R5 = 10kΩ:
+  I = 3.0V / 10000Ω = 0.3mA (Very dim/barely visible)
+
+Brightness order: R1 > R2 > R3 > R4 > R5
+</div>
+
+<h3>Visual Learning Exercise</h3>
+<ol>
+<li>Build the circuit with all 5 LEDs</li>
+<li>Observe the brightness differences</li>
+<li>Remove one resistor at a time and read its color code</li>
+<li>Calculate expected current before measuring</li>
+<li>Swap resistor positions and see LEDs change brightness</li>
+</ol>
+</div>
+
+<div class="demo-section">
+<h2>Circuit 8: Maximum Power Transfer Demonstration</h2>
+
+<div class="circuit-diagram">
+Scenario A: Mismatched Load (Inefficient)
+Arduino 5V ────[10kΩ source]────┬──── 0.45V (only 9% of voltage!)
+                                 │
+                            [1kΩ load]
+                                 │
+GND ─────────────────────────────┴
+
+Scenario B: Matched Load (Maximum Power)
+Arduino 5V ────[10kΩ source]────┬──── 2.5V (50% of voltage)
+                                 │
+                            [10kΩ load]
+                                 │
+GND ─────────────────────────────┴
+
+Scenario C: Low Resistance Load
+Arduino 5V ────[10kΩ source]────┬──── 4.55V (91% of voltage!)
+                                 │
+                            [100kΩ load]
+                                 │
+GND ─────────────────────────────┴
+</div>
+
+<div class="materials-box">
+<strong>Materials Needed:</strong>
+<ul>
+<li>1× 10kΩ resistor (source resistance)</li>
+<li>1× 1kΩ resistor (load)</li>
+<li>1× 10kΩ resistor (load)</li>
+<li>1× 100kΩ resistor (load)</li>
+<li>Multimeter</li>
+</ul>
+</div>
+
+<div class="theory-box">
+<strong>Maximum Power Transfer Theorem</strong><br>
+Maximum power is delivered to a load when the load resistance equals the source resistance:<br>
+<strong>Pmax occurs when Rload = Rsource</strong>
+
+<br><br>However, maximum efficiency (voltage transfer) occurs when Rload >> Rsource
+</div>
+
+<div class="math-box">
+<strong>Calculations for Each Scenario:</strong>
+
+Scenario A: Rload = 1kΩ (much smaller than Rsource)
+  Total R = 10kΩ + 1kΩ = 11kΩ
+  I = 5V / 11kΩ = 0.45mA
+  Vload = 0.45mA × 1kΩ = 0.45V
+  Pload = I² × Rload = (0.00045)² × 1000 = 0.20mW
+
+Scenario B: Rload = 10kΩ (matched impedance)
+  Total R = 10kΩ + 10kΩ = 20kΩ
+  I = 5V / 20kΩ = 0.25mA
+  Vload = 0.25mA × 10kΩ = 2.5V
+  Pload = I² × Rload = (0.00025)² × 10000 = 0.625mW ← Maximum!
+
+Scenario C: Rload = 100kΩ (much larger than Rsource)
+  Total R = 10kΩ + 100kΩ = 110kΩ
+  I = 5V / 110kΩ = 0.045mA
+  Vload = 0.045mA × 100kΩ = 4.55V
+  Pload = I² × Rload = (0.000045)² × 100000 = 0.20mW
+</div>
+
+<h3>Key Observations</h3>
+<ul>
+<li>Matched impedance (Scenario B) delivers maximum power to load</li>
+<li>But only 50% voltage efficiency (2.5V out of 5V)</li>
+<li>High load resistance (Scenario C) gives best voltage transfer but low power</li>
+<li>This principle is critical in audio, RF, and power systems</li>
+</ul>
+</div>
+
+<div class="demo-section">
+<h2>Arduino as Power Source - Setup Code</h2>
+
+<div class="circuit-diagram">
+/*
+ * Arduino as 5V DC Power Source
+ * No logic required - just constant outputs
+ */
+
+void setup() {
+  // Set pin 9 as OUTPUT and HIGH for 5V DC
+  pinMode(9, OUTPUT);
+  digitalWrite(9, HIGH);
+  
+  // Optional: Built-in LED for power indicator
+  pinMode(13, OUTPUT);
+  digitalWrite(13, HIGH);
+  
+  Serial.begin(9600);
+  Serial.println("Arduino 5V DC Power Source Active");
+  Serial.println("Pin 9: 5V constant output");
+  Serial.println("Pin 13: Power indicator LED ON");
+}
+
+void loop() {
+  // Nothing needed - pins stay in their states
+  // Arduino maintains constant 5V output on pin 9
+}
+</div>
+
+<div class="highlight">
+<strong>💡 Pro Tip:</strong> You can also use the Arduino's dedicated 5V pin directly without any code! Simply connect your circuits to:
+<ul>
+<li><strong>5V pin</strong> - Regulated 5V output (up to 500mA from USB, more from DC barrel jack)</li>
+<li><strong>GND pin</strong> - Ground reference</li>
+</ul>
+
+This is even simpler than using a digital pin, and doesn't require uploading any code!
+</div>
+</div>
+
+<div class="demo-section">
+<h2>Comparison Table: Arduino vs Battery Power</h2>
+
+<table>
+<tr>
+<th>Feature</th>
+<th>Arduino 5V Pin</th>
+<th>Arduino Digital Pin</th>
+<th>4× AA Batteries (6V)</th>
+<th>9V Battery</th>
+</tr>
+<tr>
+<td><strong>Voltage</strong></td>
+<td>5.0V (regulated)</td>
+<td>5.0V (regulated)</td>
+<td>6.0V (fresh) → 4.8V (depleted)</td>
+<td>9.0V (fresh) → 7.2V (depleted)</td>
+</tr>
+<tr>
+<td><strong>Current Capacity</strong></td>
+<td>~500mA (USB)<br>~900mA (barrel)</td>
+<td>40mA max per pin</td>
+<td>2000-3000mAh<br>(1-2A continuous)</td>
+<td>500mAh<br>(100mA continuous)</td>
+</tr>
+<tr>
+<td><strong>Stability</strong></td>
+<td>Excellent (regulated)</td>
+<td>Excellent (regulated)</td>
+<td>Decreases over time</td>
+<td>Decreases over time</td>
+</tr>
+<tr>
+<td><strong>Cost</strong></td>
+<td>$0 (if Arduino available)</td>
+<td>$0 (if Arduino available)</td>
+<td>~$4-6 (rechargeable cheaper long-term)</td>
+<td>~$2-4 per battery</td>
+</tr>
+<tr>
+<td><strong>Portability</strong></td>
+<td>Requires USB or adapter</td>
+<td>Requires USB or adapter</td>
+<td>Excellent (compact)</td>
+<td>Excellent (very compact)</td>
+</tr>
+<tr>
+<td><strong>Best Use Case</strong></td>
+<td>Benchtop testing,<br>multiple circuits</td>
+<td>Simple LED circuits,<br>educational demos</td>
+<td>Portable projects,<br>motor drivers</td>
+<td>Low-current sensors,<br>9V devices</td>
+</tr>
+</table>
+</div>
+
+<div class="demo-section">
+<h2>Safety Guidelines & Best Practices</h2>
+
+<div class="warning">
+<strong>⚠️ Critical Safety Rules:</strong>
+<ul>
+<li><strong>Never exceed 40mA per digital pin</strong> - Use 5V pin or external power for higher currents</li>
+<li><strong>Never short 5V to GND</strong> - Will damage Arduino or blow USB port fuse</li>
+<li><strong>Check polarity</strong> - LEDs, capacitors, and some components have polarity requirements</li>
+<li><strong>Double-check calculations</strong> - Wrong resistor values can destroy components</li>
+<li><strong>Use appropriate wire gauge</strong> - Thin wires can overheat with high current</li>
+</ul>
+</div>
+
+<div class="tips-box">
+<strong>✓ Best Practices for Circuit Building:</strong>
+<ul>
+<li><strong>Color code your wires:</strong> Red = +5V, Black = GND, other colors for signals</li>
+<li><strong>Measure before connecting:</strong> Use multimeter to verify resistor values</li>
+<li><strong>Build incrementally:</strong> Add one component at a time, test as you go</li>
+<li><strong>Keep organized:</strong> Neat wiring makes troubleshooting much easier</li>
+<li><strong>Document your work:</strong> Take photos, draw schematics, note calculations</li>
+<li><strong>Use breadboard strategically:</strong> Keep power rails clean, use rows efficiently</li>
+</ul>
+</div>
+
+<div class="theory-box">
+<strong>Why These Circuits Are Excellent Learning Tools:</strong>
+<ul>
+<li><strong>Immediate visual feedback</strong> - See results instantly with LEDs</li>
+<li><strong>No programming required</strong> - Focus purely on electronics fundamentals</li>
+<li><strong>Safe voltage levels</strong> - 5V is safe to handle and work with</li>
+<li><strong>Builds foundation</strong> - These principles apply to all circuit design</li>
+<li><strong>Easy to modify</strong> - Swap components and see what changes</li>
+<li><strong>Real measurements</strong> - Use multimeter to verify theoretical calculations</li>
+</ul>
+</div>
+</div>
+
+<div class="demo-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center;">
+<h2 style="color: white;">🎓 You've Mastered Basic DC Circuit Fundamentals!</h2>
+<p style="font-size: 1.1em;">These circuits demonstrate:</p>
+<ul style="text-align: left; display: inline-block;">
+<li>Ohm's Law (V = IR)</li>
+<li>Kirchhoff's Voltage Law (series circuits)</li>
+<li>Kirchhoff's Current Law (parallel circuits)</li>
+<li>Voltage dividers</li>
+<li>Current limiting</li>
+<li>RC time constants</li>
+<li>Maximum power transfer</li>
+<li>Component identification</li>
+</ul>
+<p><strong>Next Steps:</strong> Combine these concepts with sensors, programming, and more complex circuits!</p>
+</div>
+
+</body>
+</html>
