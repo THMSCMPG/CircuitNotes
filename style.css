@@ -193,6 +193,7 @@ tr:nth-child(even) {background: #ecf0f1;}
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
+    overflow: visible !important;
 }
 
 .logo {
