@@ -252,11 +252,21 @@ img {
     color: var(--dark) !important; /* Swaps to dark text on green background */
 }
 
-/* 1. Hide the container completely by default */
+.dropdown {
+    position: relative; /* Essential for absolute positioning of child */
+    display: flex;
+    align-items: center;
+}
+
+/* Hide the container completely by default */
 .dropdown-content {
     display: none !important; 
     position: absolute;
-    right: 0;
+
+    top: 100%;          /* Sits directly below the icon */
+    left: 50%;          /* Move left edge to the middle of the icon */
+    transform: translateX(-50%); /* Shift back by half its own width */
+    
     background-color: #1e293b; /* Dark Slate */
     min-width: 220px;
     box-shadow: 0px 8px 16px rgba(0,0,0,0.4);
@@ -267,11 +277,21 @@ img {
     padding: 5px 0; /* Space at top/bottom of list */
 }
 
-/* 2. Show the container ONLY when hovering the parent <li> */
+/* Show the container ONLY when hovering the parent <li> */
 .dropdown:hover .dropdown-content {
     display: block !important;
 }
 
+.dropdown-content::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #10b981; /* Matches your emerald border */
+}
 /* 3. Style the links inside so they don't look like the main navbar */
 .dropdown-content a {
     color: #f8fafc !important;
