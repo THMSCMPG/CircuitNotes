@@ -182,7 +182,7 @@ tr:nth-child(even) {background: #ecf0f1;}
     display: flex;
     flex-direction: column; /* Stack navbar top, dropdown bottom */
     gap: 10px;
-    overflow-x: hidden;
+    overflow-x: auto;
 }
 
 .navbar .container {
