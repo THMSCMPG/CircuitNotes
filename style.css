@@ -73,144 +73,92 @@ body {
     z-index: 9999;
 }
 
-/* --- The Hamburger Button (Your 'home-btn' class) --- */
+/* --- The Hamburger Trigger --- */
 .home-btn {
-    background: #10b981 !important; /* Emerald Green */
+    position: fixed !important;
+    top: 20px;
+    left: 20px;
     width: 50px !important;
     height: 50px !important;
+    background: #10b981 !important; /* Emerald */
+    border-radius: 8px;
+    z-index: 10001;
     display: flex !important;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    text-decoration: none;
-    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    
-    /* These lines ensure the link stays clickable even with no text */
     cursor: pointer;
-    overflow: hidden;
-    text-indent: -9999px; /* This hides the word 'Home' but keeps it clickable */
-    position: relative;
+    text-decoration: none;
+    /* This hides the text "Home" but keeps the link active */
+    font-size: 0 !important; 
+    color: transparent !important;
 }
 
-.home-btn:hover {
-    transform: scale(1.1);
-    background: #059669 !important;
-}
-
-/* Creating the Hamburger Lines using Pure CSS (No FontAwesome needed) */
-.home-btn::before, 
-.home-btn::after {
+/* Drawing the 3 Hamburger Lines */
+.home-btn::before {
     content: "";
     position: absolute;
     width: 24px;
     height: 3px;
     background: white;
-    text-indent: 0; /* Reset the text-indent for the lines */
-    left: 13px;
-    transition: 0.3s;
+    /* This creates the top and bottom lines using shadows */
+    box-shadow: 0 8px 0 white, 0 -8px 0 white;
 }
 
-/* Top Line */
-.home-btn::before {
-    top: 18px;
-    box-shadow: 0 7px 0 white; /* This creates the Middle Line */
-}
-
-/* Bottom Line */
-.home-btn::after {
-    top: 32px;
-}
-
-/* --- The Slide-Out Sidebar --- */
+/* --- The Sidebar Container --- */
 .nav-container {
     position: fixed;
     top: 0;
-    left: -320px; /* Hidden start position */
+    left: -320px; 
     width: 280px;
     height: 100vh;
-    background: #0f172a; /* Slate Darkest */
+    background: #1e293b;
     border-right: 4px solid #10b981;
-    padding: 100px 25px 30px 25px;
-    transition: 0.4s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 15px 0 30px rgba(0,0,0,0.5);
+    padding: 100px 20px;
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10000;
 }
 
-/* Trigger Slide-out when hovering the doc-nav area */
 .doc-nav:hover .nav-container {
     left: 0;
 }
 
-/* --- Dropdown Styling --- */
-.dropdown-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    text-indent: 0; /* Resetting indentation inside sidebar */
-}
-
-.dropdown-wrapper label {
-    color: #94a3b8;
-    font-size: 0.75rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-}
-
-#page-select {
-    background: #1e293b;
-    color: #f8fafc;
-    border: 1px solid #334155;
-    padding: 12px;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    width: 100%;
-}
-
-/* Adding a Footer Link in Sidebar */
-.dropdown-wrapper::after {
-    content: "Visit thmscmpg.github.io";
-    display: block;
-    margin-top: 30px;
-    padding: 12px;
-    background: rgba(16, 185, 129, 0.1);
-    color: #10b981;
-    text-align: center;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 0.8rem;
-    border: 1px dashed #10b981;
-}
-
+/* --- The Download Button (The "Block" Fix) --- */
 .download-btn {
-    display: inline-flex !important; /* Force it to act like a block button */
+    display: flex !important; /* This makes it a block/box */
     align-items: center;
     justify-content: center;
     gap: 10px;
+    
+    /* Colors & Style */
     background: #10b981 !important;
     color: white !important;
-    padding: 12px 24px !important;
+    padding: 14px 28px !important;
     border-radius: 8px !important;
     text-decoration: none !important;
     font-weight: bold !important;
-    margin: 20px 0;
-    transition: 0.2s;
-    border: none;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    
+    /* Layout */
+    width: fit-content;
+    margin: 25px 0 !important;
+    border: none !important;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: 0.2s ease-in-out;
 }
 
 .download-btn:hover {
     background: #059669 !important;
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
 
-/* Ensure FontAwesome icons inside the button look right */
-.download-btn i {
-    font-size: 1.1rem;
+/* Style for the text inside the sidebar select */
+#page-select {
+    width: 100%;
+    padding: 10px;
+    background: #334155;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid #475569;
 }
 
 .footer { text-align: center; padding: 60px 0; border-top: 1px solid var(--border); color: var(--text-light); font-size: 0.9rem; }
