@@ -487,97 +487,101 @@ Typical mechanical bounce: 5-50ms<br>
 Software filter: Ignore transitions < 1ms apart<br>
 Minimum time = 1000 microseconds
 </div>
-
+<div class="code-header">
+    <a href="/code/Encoder_Volume.ino" download class="download-btn">
+        <i class="fas fa-download"></i> Download .ino File
+    </a>
+</div>
 <h3>Arduino Code</h3>
 <div class="code-section">
-// Rotary Encoder Volume Control
-const int PIN_A = 2;      // CLK
-const int PIN_B = 3;      // DT
-const int PIN_SW = 4;     // Switch (button)
-
-volatile int encoderPos = 50;  // Start at 50% volume
-volatile int lastEncoded = 0;
-volatile unsigned long lastInterrupt = 0;
-
-int volume = 50;  // 0-100%
-bool muted = false;
-
-void setup() {
-  pinMode(PIN_A, INPUT_PULLUP);
-  pinMode(PIN_B, INPUT_PULLUP);
-  pinMode(PIN_SW, INPUT_PULLUP);
-  
-  // Attach interrupts
-  attachInterrupt(digitalPinToInterrupt(PIN_A), updateEncoder, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(PIN_B), updateEncoder, CHANGE);
-  
-  Serial.begin(9600);
-  Serial.println("Volume Control Ready");
-  printVolume();
-}
-
-void loop() {
-  // Update volume from encoder position
-  static int lastPos = encoderPos;
-  if(encoderPos != lastPos) {
-    volume = constrain(encoderPos, 0, 100);
-    lastPos = encoderPos;
-    printVolume();
-  }
-  
-  // Check for button press (mute/unmute)
-  static bool lastButton = HIGH;
-  bool currentButton = digitalRead(PIN_SW);
-  
-  if(lastButton == HIGH && currentButton == LOW) {
-    delay(50); // Debounce
-    if(digitalRead(PIN_SW) == LOW) {
-      muted = !muted;
-      Serial.print("MUTED: ");
-      Serial.println(muted ? "ON" : "OFF");
-    }
-  }
-  lastButton = currentButton;
-  
-  delay(10);
-}
-
-void updateEncoder() {
-  // Debouncing
-  unsigned long interruptTime = micros();
-  if(interruptTime - lastInterrupt < 1000) return;
-  lastInterrupt = interruptTime;
-  
-  // Read current state
-  int MSB = digitalRead(PIN_A);
-  int LSB = digitalRead(PIN_B);
-  int encoded = (MSB << 1) | LSB;
-  int sum = (lastEncoded << 2) | encoded;
-  
-  // Determine direction
-  if(sum == 0b1101 || sum == 0b0100 || sum == 0b0010 || sum == 0b1011) {
-    encoderPos++;
-  }
-  else if(sum == 0b1110 || sum == 0b0111 || sum == 0b0001 || sum == 0b1000) {
-    encoderPos--;
-  }
-  
-  lastEncoded = encoded;
-}
-
-void printVolume() {
-  Serial.print("Volume: ");
-  Serial.print(volume);
-  Serial.print("% ");
-  
-  // Visual bar
-  Serial.print("[");
-  for(int i = 0; i < 20; i++) {
-    if(i < volume / 5) Serial.print("=");
-    else Serial.print(" ");
-  }
-  Serial.println("]");
-}
+// Rotary Encoder Volume Control<br>
+const int PIN_A = 2;      // CLK<br>
+const int PIN_B = 3;      // DT<br>
+const int PIN_SW = 4;     // Switch (button)<br>
+<br>
+volatile int encoderPos = 50;  // Start at 50% volume<br>
+volatile int lastEncoded = 0;<br>
+volatile unsigned long lastInterrupt = 0;<br>
+<br>
+int volume = 50;  // 0-100%<br>
+bool muted = false;<br>
+<br>
+void setup() {<br>
+  pinMode(PIN_A, INPUT_PULLUP);<br>
+  pinMode(PIN_B, INPUT_PULLUP);<br>
+  pinMode(PIN_SW, INPUT_PULLUP);<br>
+  <br>
+  // Attach interrupts<br>
+  attachInterrupt(digitalPinToInterrupt(PIN_A), updateEncoder, CHANGE);<br>
+  attachInterrupt(digitalPinToInterrupt(PIN_B), updateEncoder, CHANGE);<br>
+  <br>
+  Serial.begin(9600);<br>
+  Serial.println("Volume Control Ready");<br>
+  printVolume();<br>
+}<br>
+<br>
+void loop() {<br>
+  // Update volume from encoder position<br>
+  static int lastPos = encoderPos;<br>
+  if(encoderPos != lastPos) {<br>
+    volume = constrain(encoderPos, 0, 100);<br>
+    lastPos = encoderPos;<br>
+    printVolume();<br>
+  }<br>
+  <br>
+  // Check for button press (mute/unmute)<br>
+  static bool lastButton = HIGH;<br>
+  bool currentButton = digitalRead(PIN_SW);<br>
+  <br>
+  if(lastButton == HIGH && currentButton == LOW) {<br>
+    delay(50); // Debounce<br>
+    if(digitalRead(PIN_SW) == LOW) {<br>
+      muted = !muted;<br>
+      Serial.print("MUTED: ");<br>
+      Serial.println(muted ? "ON" : "OFF");<br>
+    }<br>
+  }<br>
+  lastButton = currentButton;<br>
+  <br>
+  delay(10);<br>
+}<br>
+<br>
+void updateEncoder() {<br>
+  // Debouncing<br>
+  unsigned long interruptTime = micros();<br>
+  if(interruptTime - lastInterrupt < 1000) return;<br>
+  lastInterrupt = interruptTime;<br>
+  <br>
+  // Read current state<br>
+  int MSB = digitalRead(PIN_A);<br>
+  int LSB = digitalRead(PIN_B);<br>
+  int encoded = (MSB < 1) | LSB;<br>
+  int sum = (lastEncoded < 2) | encoded;<br>
+  <br>
+  // Determine direction<br>
+  if(sum == 0b1101 || sum == 0b0100 || sum == 0b0010 || sum == 0b1011) {<br>
+    encoderPos++;<br>
+  }<br>
+  else if(sum == 0b1110 || sum == 0b0111 || sum == 0b0001 || sum == 0b1000) {<br>
+    encoderPos--;<br>
+  }<br>
+  <br>
+  lastEncoded = encoded;<br>
+}<br>
+<br>
+void printVolume() {<br>
+  Serial.print("Volume: ");<br>
+  Serial.print(volume);<br>
+  Serial.print("% ");<br>
+  <br>
+  // Visual bar<br>
+  Serial.print("[");<br>
+  for(int i = 0; i < 20; i++) {<br>
+    if(i < volume / 5) Serial.print("=");<br>
+    else Serial.print(" ");<br>
+  }<br>
+  Serial.println("]");<br>
+}<br>
 </div>
 
 <h3>Use Cases</h3>
@@ -630,7 +634,7 @@ If encoder drives a lead screw with 2mm pitch:<br>
 Linear distance = (count / 80) × 2mm = count × 0.025mm
 </div>
 <div class="code-header">
-    <a href="/code/Rotary.ino" download class="download-btn">
+    <a href="/code/Position_Counter.ino" download class="download-btn">
         <i class="fas fa-download"></i> Download .ino File
     </a>
 </div>
