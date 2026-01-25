@@ -293,6 +293,16 @@ img {
     border-bottom: 6px solid #10b981; /* Matches your emerald border */
 }
 
+.dropdown-content::after {
+    content: "";
+    position: absolute;
+    top: -20px; /* Reaches up to touch the navbar */
+    left: 0;
+    right: 0;
+    height: 20px;
+    display: block;
+}
+
 /* 3. Style the links inside so they don't look like the main navbar */
 .dropdown-content a {
     color: #f8fafc !important;
