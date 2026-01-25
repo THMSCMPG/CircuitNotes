@@ -308,6 +308,29 @@ img {
     height: 100%;
 }
 
+.nav-label {
+    color: #94a3b8; /* Muted Slate */
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap; /* Prevents text from wrapping */
+    pointer-events: none; /* User clicks through text to the menu */
+}
+
+/* Style the arrow icon specifically */
+.nav-label i {
+    color: #10b981; /* Emerald Arrow */
+    margin-left: 5px;
+    font-size: 0.8rem;
+}
+
+/* Optional: Make the label glow when the menu is hovered */
+.dropdown:hover .nav-label {
+    color: #f8fafc;
+    transition: 0.3s;
+}
+    
 #page-select {
     background: #334155;
     color: white;
