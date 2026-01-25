@@ -65,7 +65,7 @@ body {
 .btn-link:hover { background: white; border-color: var(--primary); color: var(--primary); padding-left: 20px; }
 .btn-link:hover:after { opacity: 1; }
 
-/* --- Navigation Wrapper --- */
+/* --- Floating Sidebar Wrapper --- */
 .doc-nav {
     position: fixed;
     top: 20px;
@@ -73,127 +73,144 @@ body {
     z-index: 9999;
 }
 
-/* --- Hamburger Trigger --- */
-/* We turn the Home button into the 'Hamburger' icon */
+/* --- The Hamburger Button (Your 'home-btn' class) --- */
 .home-btn {
-    background: #10b981; /* Emerald Primary */
-    color: white !important;
-    width: 50px;
-    height: 50px;
-    display: flex;
+    background: #10b981 !important; /* Emerald Green */
+    width: 50px !important;
+    height: 50px !important;
+    display: flex !important;
     align-items: center;
     justify-content: center;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     text-decoration: none;
-    transition: 0.3s;
-    font-size: 1.2rem;
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    /* These lines ensure the link stays clickable even with no text */
+    cursor: pointer;
+    overflow: hidden;
+    text-indent: -9999px; /* This hides the word 'Home' but keeps it clickable */
+    position: relative;
 }
 
 .home-btn:hover {
-    background: #059669;
-    transform: scale(1.05);
+    transform: scale(1.1);
+    background: #059669 !important;
 }
 
-/* Hide the word 'Home' and the House icon to show the Hamburger instead */
-.home-btn i, .home-btn {
-    font-size: 0; /* Hide text */
+/* Creating the Hamburger Lines using Pure CSS (No FontAwesome needed) */
+.home-btn::before, 
+.home-btn::after {
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 3px;
+    background: white;
+    text-indent: 0; /* Reset the text-indent for the lines */
+    left: 13px;
+    transition: 0.3s;
 }
 
+/* Top Line */
 .home-btn::before {
-    content: '\f0c9'; /* FontAwesome Hamburger Icon */
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    font-size: 1.5rem;
+    top: 18px;
+    box-shadow: 0 7px 0 white; /* This creates the Middle Line */
 }
 
-/* --- The Floating Sidebar --- */
-/* We hide the container until the user hovers over the area */
+/* Bottom Line */
+.home-btn::after {
+    top: 32px;
+}
+
+/* --- The Slide-Out Sidebar --- */
 .nav-container {
     position: fixed;
     top: 0;
-    left: -300px; /* Hidden off-screen */
+    left: -320px; /* Hidden start position */
     width: 280px;
     height: 100vh;
-    background: #1e293b; /* Slate Dark */
-    border-right: 3px solid #10b981;
-    padding: 80px 20px 20px 20px;
-    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #0f172a; /* Slate Darkest */
+    border-right: 4px solid #10b981;
+    padding: 100px 25px 30px 25px;
+    transition: 0.4s ease-in-out;
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    box-shadow: 10px 0 30px rgba(0,0,0,0.3);
+    box-shadow: 15px 0 30px rgba(0,0,0,0.5);
 }
 
-/* Slide out when hovering over the menu area */
+/* Trigger Slide-out when hovering the doc-nav area */
 .doc-nav:hover .nav-container {
     left: 0;
 }
 
-/* --- Sidebar Content --- */
+/* --- Dropdown Styling --- */
 .dropdown-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
+    text-indent: 0; /* Resetting indentation inside sidebar */
 }
 
 .dropdown-wrapper label {
     color: #94a3b8;
-    font-weight: bold;
+    font-size: 0.75rem;
+    font-weight: 800;
     text-transform: uppercase;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
 }
 
-/* The actual Dropdown Select */
 #page-select {
-    background: #334155;
-    color: white;
-    border: 1px solid #475569;
+    background: #1e293b;
+    color: #f8fafc;
+    border: 1px solid #334155;
     padding: 12px;
     border-radius: 8px;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     cursor: pointer;
     width: 100%;
 }
 
-#page-select:focus {
-    border-color: #10b981;
-    outline: none;
-}
-
-/* Add a real "Back to Home" link inside the sidebar */
+/* Adding a Footer Link in Sidebar */
 .dropdown-wrapper::after {
-    content: "← Back to Portfolio";
-    margin-top: 20px;
-    color: #10b981;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 0.9rem;
+    content: "Visit thmscmpg.github.io";
     display: block;
-}
-
-/* Adjust Main Content so it doesn't get hidden under the fixed button */
-body {
-    padding-left: 0; 
+    margin-top: 30px;
+    padding: 12px;
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    text-align: center;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    border: 1px dashed #10b981;
 }
 
 .download-btn {
-    display: block;
-    margin-top: 10px;
-    background: #10b981;
+    display: inline-flex !important; /* Force it to act like a block button */
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #10b981 !important;
     color: white !important;
-    text-align: center;
-    padding: 10px;
-    border-radius: 6px;
-    font-weight: bold;
-    text-decoration: none;
-    font-size: 0.85rem;
+    padding: 12px 24px !important;
+    border-radius: 8px !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    margin: 20px 0;
+    transition: 0.2s;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .download-btn:hover {
-    background: #059669;
+    background: #059669 !important;
     transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+/* Ensure FontAwesome icons inside the button look right */
+.download-btn i {
+    font-size: 1.1rem;
 }
 
 .footer { text-align: center; padding: 60px 0; border-top: 1px solid var(--border); color: var(--text-light); font-size: 0.9rem; }
