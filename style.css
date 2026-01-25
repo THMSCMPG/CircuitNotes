@@ -19,14 +19,6 @@ body {
 
 .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-/* Navigation */
-.navbar { background: white; padding: 1rem 0; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
-.navbar .container { display: flex; justify-content: space-between; align-items: center; }
-.logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--dark); display: flex; align-items: center; gap: 8px; }
-.nav-links { list-style: none; display: flex; gap: 24px; margin: 0; padding: 0; }
-.nav-links a { text-decoration: none; color: var(--text); font-weight: 500; transition: color 0.2s; }
-.nav-links a:hover { color: var(--primary); }
-
 /* Hero Section */
 .hero { background: white; padding: 80px 0; text-align: center; border-bottom: 1px solid var(--border); }
 .hero h1 { font-size: 3rem; color: var(--dark); margin: 0 0 16px 0; letter-spacing: -0.025em; }
@@ -65,90 +57,101 @@ body {
 .btn-link:hover { background: white; border-color: var(--primary); color: var(--primary); padding-left: 20px; }
 .btn-link:hover:after { opacity: 1; }
 
-/* --- Floating Sidebar Wrapper --- */
-.doc-nav {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 9999;
-}
-
-/* --- The Hamburger Trigger --- */
-.home-btn {
-    position: fixed !important;
-    top: 20px;
-    left: 20px;
-    width: 50px !important;
-    height: 50px !important;
-    background: #10b981 !important; /* Emerald */
-    border-radius: 8px;
-    z-index: 10001;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    text-decoration: none;
-    /* This hides the text "Home" but keeps the link active */
-    font-size: 0 !important; 
-    color: transparent !important;
-}
-
-/* Drawing the 3 Hamburger Lines */
-.home-btn::before {
-    content: "";
-    position: absolute;
-    width: 24px;
-    height: 3px;
-    background: white;
-    /* This creates the top and bottom lines using shadows */
-    box-shadow: 0 8px 0 white, 0 -8px 0 white;
-}
-
-/* --- The Sidebar Container --- */
-.nav-container {
-    position: fixed;
+/* --- Global Navbar Styling --- */
+.navbar {
+    background: #1e293b; /* Slate Dark */
+    border-bottom: 3px solid #10b981; /* Emerald */
+    padding: 10px 20px;
+    position: sticky;
     top: 0;
-    left: -320px; 
-    width: 280px;
-    height: 100vh;
-    background: #1e293b;
-    border-right: 4px solid #10b981;
-    padding: 100px 20px;
-    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 10000;
-}
-
-.doc-nav:hover .nav-container {
-    left: 0;
-}
-
-/* --- The Download Button (The "Block" Fix) --- */
-.download-btn {
-    display: flex !important; /* This makes it a block/box */
-    align-items: center;
-    justify-content: center;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column; /* Stack navbar top, dropdown bottom */
     gap: 10px;
-    
-    /* Colors & Style */
+}
+
+.navbar .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: #10b981 !important;
+    font-weight: 800;
+    font-size: 1.3rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* --- Nav Links --- */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: #f8fafc !important;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    color: #10b981 !important;
+}
+
+/* --- Dropdown Wrapper (The "Jump to" Section) --- */
+.dropdown-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Aligns to the right */
+    gap: 10px;
+    padding-top: 5px;
+    border-top: 1px solid #334155;
+}
+
+.dropdown-wrapper label {
+    color: #94a3b8;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+#page-select {
+    background: #334155;
+    color: white;
+    border: 1px solid #475569;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+/* --- Download Button (Ensuring it's a Block) --- */
+.download-btn {
+    display: inline-flex !important;
+    align-items: center;
     background: #10b981 !important;
     color: white !important;
-    padding: 14px 28px !important;
-    border-radius: 8px !important;
+    padding: 12px 20px !important;
+    border-radius: 6px !important;
     text-decoration: none !important;
     font-weight: bold !important;
-    
-    /* Layout */
-    width: fit-content;
-    margin: 25px 0 !important;
-    border: none !important;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-    transition: 0.2s ease-in-out;
-}
-
-.download-btn:hover {
-    background: #059669 !important;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    margin: 20px 0 !important;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 /* Style for the text inside the sidebar select */
