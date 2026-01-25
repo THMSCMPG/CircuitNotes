@@ -65,70 +65,135 @@ body {
 .btn-link:hover { background: white; border-color: var(--primary); color: var(--primary); padding-left: 20px; }
 .btn-link:hover:after { opacity: 1; }
 
+/* --- Navigation Wrapper --- */
 .doc-nav {
-    background: #1e293b;
-    padding: 10px 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 3px solid #10b981;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 9999;
 }
 
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
+/* --- Hamburger Trigger --- */
+/* We turn the Home button into the 'Hamburger' icon */
+.home-btn {
+    background: #10b981; /* Emerald Primary */
+    color: white !important;
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding: 0 20px;
-}
-
-.home-btn {
-    background: #10b981;
-    color: white;
+    justify-content: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-weight: bold;
-    transition: 0.2s;
+    transition: 0.3s;
+    font-size: 1.2rem;
 }
 
 .home-btn:hover {
     background: #059669;
+    transform: scale(1.05);
 }
 
-.dropdown-wrapper {
-    color: white;
+/* Hide the word 'Home' and the House icon to show the Hamburger instead */
+.home-btn i, .home-btn {
+    font-size: 0; /* Hide text */
+}
+
+.home-btn::before {
+    content: '\f0c9'; /* FontAwesome Hamburger Icon */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 1.5rem;
+}
+
+/* --- The Floating Sidebar --- */
+/* We hide the container until the user hovers over the area */
+.nav-container {
+    position: fixed;
+    top: 0;
+    left: -300px; /* Hidden off-screen */
+    width: 280px;
+    height: 100vh;
+    background: #1e293b; /* Slate Dark */
+    border-right: 3px solid #10b981;
+    padding: 80px 20px 20px 20px;
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column;
+    gap: 30px;
+    box-shadow: 10px 0 30px rgba(0,0,0,0.3);
 }
 
+/* Slide out when hovering over the menu area */
+.doc-nav:hover .nav-container {
+    left: 0;
+}
+
+/* --- Sidebar Content --- */
+.dropdown-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.dropdown-wrapper label {
+    color: #94a3b8;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+/* The actual Dropdown Select */
 #page-select {
-    padding: 8px;
-    border-radius: 6px;
-    border: 1px solid #475569;
     background: #334155;
     color: white;
+    border: 1px solid #475569;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.95rem;
     cursor: pointer;
+    width: 100%;
+}
+
+#page-select:focus {
+    border-color: #10b981;
+    outline: none;
+}
+
+/* Add a real "Back to Home" link inside the sidebar */
+.dropdown-wrapper::after {
+    content: "← Back to Portfolio";
+    margin-top: 20px;
+    color: #10b981;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: block;
+}
+
+/* Adjust Main Content so it doesn't get hidden under the fixed button */
+body {
+    padding-left: 0; 
 }
 
 .download-btn {
-    background: #f8fafc;
-    border: 1px solid #cbd5e1;
-    color: #1e293b;
-    padding: 6px 12px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-size: 0.9rem;
+    display: block;
+    margin-top: 10px;
+    background: #10b981;
+    color: white !important;
+    text-align: center;
+    padding: 10px;
+    border-radius: 6px;
     font-weight: bold;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+    text-decoration: none;
+    font-size: 0.85rem;
 }
 
 .download-btn:hover {
-    background: #e2e8f0;
+    background: #059669;
+    transform: scale(1.05);
 }
 
 .footer { text-align: center; padding: 60px 0; border-top: 1px solid var(--border); color: var(--text-light); font-size: 0.9rem; }
