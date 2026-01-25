@@ -20,27 +20,35 @@ th {background: #34495e; color: white;}
 </style>
 </head>
 <body>
-<nav class="doc-nav">
-    <div class="nav-container">
-        <a href="https://thmscmpg.github.io/CircuitNotes/index.html" class="home-btn"><i class="fas fa-house"></i> Home</a>
+<nav class="navbar">
+        <div class="container">
+            <a href="https://thmscmpg.github.io/" class="logo"><i class="fas fa-bolt-lightning"></i> THMSCMPG</a>
+            <ul class="nav-links">
+                <li><a href="https://thmscmpg.github.io/">Home</a></li>
+                <li><a href="https://thmscmpg.github.io/projects.html">Research</a></li>
+                <li><a href="https://thmscmpg.github.io/reports.html">Lab Reports</a></li>
+                <li><a href="https://thmscmpg.github.io/assets/Campagna_CV_2025.pdf" target="_blank" rel="noopener noreferrer">CV</a></li>
+                <li><a href="https://thmscmpg.github.io/CircuitNotes/">CircuitNotes</a></li>
+                <li><a href="https://thmscmpg.github.io/CircuitNotes/docs/master-reference.html">Master Ref</a></li>
 
-        <div class="dropdown-wrapper">
-            <label for="page-select">Jump to:</label>
-            <select id="page-select" onchange="window.location.href=this.value;">
-                <option value="" disabled selected>Select a Document</option>
-                <option value="basic-5v-circuits.html">Basic 5V DC Circuits</option>
-                <option value="led-demos.html">Standard LED Demos</option>
-                <option value="rgb-led-demos.html">RGB LED Control</option>
-                <option value="photoresistor-demos.html">Photoresistors (LDR)</option>
-                <option value="rotary-encoder-demos.html">Rotary Encoders</option>
-                <option value="matrix-keypad-theory.html">Matrix Keypads</option>
-                <option value="oled-buzzer-theory.html">OLED & Buzzers</option>
-                <option value="seven-segment-dip.html">7-Segment & DIP</option>
-                <option value="master-reference.html">Master Reference</option>
-            </select>
+                <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-bars"></i></a>
+                <div class="dropdown-content">
+                    <a href="https://thmscmpg.github.io/CircuitNotes/docs/basic-5v-circuits.html">Basic 5V DC</a>
+                    <a href="https://thmscmpg.github.io/CircuitNotes/docs/led-demos.html">LED Demos</a>
+                    <a href="https://thmscmpg.github.io/CircuitNotes/docs/rgb-led-demos.html">RGB LED</a>
+                    <a href="https://thmscmpg.github.io/CircuitNotes/docs/photoresistor-demos.html">Photoresistors</a>
+                    <a href="https://thmscmpg.github.io/CircuitNotes/docs/rotary-encoder-demos.html">Rotary Encoders</a>
+                    <a href="https://thmscmpg.github.io/CircuitNotes/docs/matrix-keypad-theory.html">Keypads</a>
+                    <a href="https://thmscmpg.github.io/CircuitNotes/docs/oled-buzzer-theory.html">OLED & Buzzer</a>
+                    <a href="https://thmscmpg.github.io/CircuitNotes/docs/seven-segment-dip.html">7-Segment</a>
+                </div>
+                </li>
+                
+                <li><a href="https://github.com/THMSCMPG"><i class="fab fa-github"></i> GitHub</a></li>
+            </ul>
         </div>
-    </div>
-</nav>
+    </nav>
 <h1>☀️ Photoresistor (LDR) Circuit Demonstrations</h1>
 
 <div class="demo-section">
