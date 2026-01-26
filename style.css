@@ -176,7 +176,7 @@ tr:nth-child(even) {background: #ecf0f1;}
     box-sizing: border-box;
     border-bottom: 3px solid #10b981; /* Emerald */
     width: 100%
-    position: sticky;
+    position: sticky !important;
     top: 0;
     z-index: 1000;
     display: flex;
@@ -223,7 +223,7 @@ img {
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1px;
-    position: fixed;
+    position: fixed !important;
     top: 15px;
     right: 15px;
     z-index: 10001; /* Above the navbar and content */
@@ -234,7 +234,7 @@ img {
 .sidebar {
     height: 100%;
     width: 0; 
-    position: fixed;
+    position: fixed !important;
     z-index: 10002; 
     top: 0;
     right: 0; 
