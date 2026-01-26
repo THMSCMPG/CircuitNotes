@@ -175,11 +175,11 @@ tr:nth-child(even) {background: #ecf0f1;}
     background: #1e293b; /* Slate Dark */
     box-sizing: border-box;
     border-bottom: 3px solid #10b981; /* Emerald */
-    width: 100%
-    position: fixed !important;
+    width: 100%;
     top: 0;
     z-index: 1000;
     display: flex;
+    position: fixed !important;
     flex-direction: column; /* Stack navbar top, dropdown bottom */
     gap: 10px;
 }
