@@ -69,6 +69,88 @@ body {
     gap: 8px;
 }
 
+/* 1. Style the Toggle Button (Emerald Theme) */
+.menu-btn {
+    display: none; /* Hidden on Desktop */
+    background-color: var(--primary);
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 10001; /* Above the navbar and content */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* 2. The Sidebar (Dark Slate Theme) */
+.sidebar {
+    height: 100%;
+    width: 0; 
+    position: fixed;
+    z-index: 10002; 
+    top: 0;
+    right: 0; 
+    background-color: var(--dark-muted);
+    overflow-x: hidden;
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother "slide" */
+    padding-top: 80px;
+    border-left: 2px solid var(--primary);
+}
+
+/* Sidebar Links */
+.sidebar a {
+    padding: 15px 32px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #94a3b8; /* Muted Slate text */
+    display: block;
+    transition: 0.3s;
+    white-space: nowrap;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.sidebar a:hover {
+    color: var(--primary);
+    background: rgba(16, 185, 129, 0.1);
+    padding-left: 40px;
+}
+
+/* The Close 'X' Button */
+.sidebar .close-btn {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 30px;
+    color: var(--primary);
+    border-bottom: none;
+}
+
+/* 3. The Responsive "Switch" */
+@media screen and (max-width: 768px) {
+    /* Hide the standard desktop navbar */
+    .navbar {
+        display: none !important;
+    }
+    
+    /* Show the mobile menu button */
+    .menu-btn {
+        display: block;
+    }
+
+    /* Optional: Add space at the top of the body so content isn't under the button */
+    body {
+        padding-top: 20px;
+    }
+}
+
 /* --- Nav Links --- */
 .nav-links {
     list-style: none;
