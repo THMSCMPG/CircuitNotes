@@ -38,7 +38,7 @@ body {
     background: var(--dark-muted);
     border-bottom: 3px solid var(--primary);
     width: 100%;
-    position: sticky !important;
+    position: fixed !important;
     top: 0;
     z-index: 1000;
     display: flex;
