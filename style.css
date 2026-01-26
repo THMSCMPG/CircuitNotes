@@ -176,7 +176,7 @@ tr:nth-child(even) {background: #ecf0f1;}
     box-sizing: border-box;
     border-bottom: 3px solid #10b981; /* Emerald */
     width: 100%
-    position: sticky !important;
+    position: fixed !important;
     top: 0;
     z-index: 1000;
     display: flex;
