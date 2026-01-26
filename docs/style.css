@@ -17,8 +17,7 @@ html, body {
     max-width: 100%;
     overflow-x: hidden;
     margin: 0;
-    padding-top: 70px;
-    padding: 0;
+    padding-top: 70px !important;
 }
 
 body {
@@ -26,6 +25,7 @@ body {
     background-color: var(--light);
     color: var(--text);
     line-height: 1.6;
+    padding-top: 25px !important;
 }
 
 .container {
