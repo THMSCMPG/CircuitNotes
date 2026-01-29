@@ -128,7 +128,6 @@ body.sidebar-open {
     position: relative;
     display: flex;
     align-items: center;
-    gap: 8px;
 }
 
 .nav-label {
@@ -156,19 +155,19 @@ body.sidebar-open {
 }
 
 .dropdown-content {
-    display: none;
+    display: none; /* Controlled by hover */
     position: absolute;
     top: 100%;
-    right: 0; /* Right-aligned since it's the last nav item */
+    left: 50%;
+    transform: translateX(-50%);
     background-color: var(--dark-muted);
     min-width: 220px;
-    box-shadow: 0px 8px 20px rgba(0,0,0,0.4);
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.4);
     z-index: 1001;
     border: 1px solid var(--primary);
     border-radius: 6px;
-    margin-top: 10px;
+    margin-top: 5px;
     padding: 5px 0;
-    animation: dropdownFade 0.2s ease-in;
 }
 
 @keyframes dropdownFade {
@@ -183,14 +182,15 @@ body.sidebar-open {
 }
 
 .dropdown:hover .dropdown-content {
-    display: block;
+    display: block !important;
 }
 
 .dropdown-content::before {
     content: '';
     position: absolute;
     top: -6px;
-    right: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     border-bottom: 6px solid var(--primary);
@@ -204,7 +204,7 @@ body.sidebar-open {
     text-align: left;
     border-bottom: 1px solid #334155;
     background: none !important;
-    transition: all 0.2s;
+    transition: all 0.5s;
 }
 
 .dropdown-content a:last-child {
