@@ -332,7 +332,8 @@ body.sidebar-open {
 .page-header {
     background: linear-gradient(135deg, var(--dark) 0%, var(--dark-muted) 100%);
     color: white;
-    padding: auto;
+    padding-top: 130px;
+    padding-bottom: 35px;
     margin-top: 0 !important;
     border-bottom: 3px solid var(--primary);
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
