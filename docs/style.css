@@ -332,6 +332,8 @@ body.sidebar-open {
 .page-header {
     background: linear-gradient(135deg, var(--dark) 0%, var(--dark-muted) 100%);
     color: white;
+    --navbar-offset: 20px;
+    top: var(--navbar-offset);
     padding: auto;
     margin-top: 0 !important;
     border-bottom: 3px solid var(--primary);
