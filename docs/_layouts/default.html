@@ -4,6 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }} | Thomas Campagna</title>
+    <style>  
+    .demo-section {
+    background: white;
+    padding: 25px;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+    color: #2c3e50;
+    border-bottom: 3px solid #27ae60;
+    padding-bottom: 10px;
+    text-align: center;
+    }
+    h2 {
+    color: #34495e;
+    margin-top: 0;
+    background: #ecf0f1;
+    padding: 10px;
+    border-left: 5px solid #27ae60;
+    }
+    h3 {
+    color: #16a085;
+    }
+    .circuit-diagram {
+    background: #2c3e50;
+    color: #ecf0f1;
+    padding: 20px;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    margin: 15px 0;
+    overflow-x: auto;
+    white-space: pre;
+    font-size: 14px;
+    }
+    .color-box {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #333;
+    margin: 0 5px;
+    vertical-align: middle;
+    }
+    .theory-box {
+    background: #e8f4f8;
+    padding: 15px;
+    border-left: 4px solid #3498db;
+    margin: 15px 0;
+    }
+    .math-box {
+    background: #fef5e7;
+    padding: 15px;
+    border-left: 4px solid #f39c12;
+    margin: 15px 0;
+    font-family: 'Courier New', monospace;
+    }
+    .code-section {
+    background: #2c3e50;
+    color: #ecf0f1;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    margin: 15px 0;
+    }
+    .materials-box {
+    background: #d5f4e6;
+    padding: 15px;
+    border-left: 4px solid #27ae60;
+    margin: 15px 0;
+    }
+    table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    }
+    th, td {
+    border: 1px solid #bdc3c7;
+    padding: 10px;
+    text-align: left;
+    }
+    th {
+    background: #34495e;
+    color: white;
+    }
+    tr:nth-child(even) {background: #ecf0f1;}
+    .warning {
+    background: #ffe6e6;
+    padding: 10px;
+    border-left: 4px solid #e74c3c;
+    margin: 10px 0;
+    }
+    .highlight {
+    background: #fff9e6;
+      padding: 10px;
+      border-left: 4px solid #f39c12;
+      margin: 10px 0;
+    }
+    .component-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin: 20px 0;}
+    .component-card {background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-left: 4px solid #e74c3c;}
+    .component-card h4 {margin-top: 0; color: #e74c3c;}
+    .tips-box {background: #d5f4e6; padding: 15px; border-left: 4px solid #27ae60; margin: 15px 0; border-radius: 5px;}
+    .info-box {background: #e8f4f8; padding: 15px; border-left: 4px solid #3498db; margin: 15px 0; border-radius: 5px;}
+    .formula {background: #fef5e7; padding: 10px; border-radius: 5px; font-family: 'Courier New', monospace; margin: 10px 0;}
+    .key-grid {display: grid; grid-template-columns: repeat(4, 60px); gap: 5px; margin: 15px 0;}
+    .key {background: #34495e; color: white; padding: 15px; text-align: center; font-size: 20px; font-weight: bold; border-radius: 5px;}
+    .segment-display {font-family: monospace; background: #000; color: #ff0000; padding: 20px; text-align: center; font-size: 48px; border-radius: 5px; margin: 15px 0;}
+    </style>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>

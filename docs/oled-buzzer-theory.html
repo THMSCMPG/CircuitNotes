@@ -1,72 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OLED & Buzzer Theory</title>
-<style>
-.demo-section {background: white; padding: 25px; margin: 20px 0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);}
-h1 {color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px;}
-h2 {color: #34495e; margin-top: 0;}
-h3 {color: #16a085;}
-.circuit-diagram {background: #ecf0f1; padding: 20px; border-radius: 5px; font-family: 'Courier New', monospace; margin: 15px 0; overflow-x: auto;}
-.theory-box {background: #e8f4f8; padding: 15px; border-left: 4px solid #3498db; margin: 15px 0;}
-.math-box {background: #fef5e7; padding: 15px; border-left: 4px solid #f39c12; margin: 15px 0;}
-table {width: 100%; border-collapse: collapse; margin: 15px 0;}
-th, td {border: 1px solid #bdc3c7; padding: 10px; text-align: left;}
-th {background: #34495e; color: white;}
-.warning {background: #ffe6e6; padding: 10px; border-left: 4px solid #e74c3c; margin: 10px 0;}
-</style>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
+---
+layout: default
+title: OLED Display
+---
 
-<button class="menu-btn" onclick="toggleSidebar()">MENU &#9662;</button>
-
-    <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="close-btn" onclick="toggleSidebar()">&times;</a>
-        <a href="https://thmscmpg.github.io/">Home</a>
-        <a href="https://thmscmpg.github.io/CircuitNotes/">CircuitNotes</a>
-        <a href="https://thmscmpg.github.io/CircuitNotes/docs/master-reference.html">Master Ref</a>
-        <a href="https://thmscmpg.github.io/CircuitNotes/docs/basic-5v-circuits.html">Basic 5V DC</a>
-        <a href="https://thmscmpg.github.io/CircuitNotes/docs/led-demos.html">LED Demos</a>
-        <a href="https://thmscmpg.github.io/CircuitNotes/docs/rgb-led-demos.html">RGB LED</a>
-        <a href="https://thmscmpg.github.io/CircuitNotes/docs/photoresistor-demos.html">Photoresistors</a>
-        <a href="https://thmscmpg.github.io/CircuitNotes/docs/rotary-encoder-demos.html">Rotary Encoders</a>
-        <a href="https://thmscmpg.github.io/CircuitNotes/docs/matrix-keypad-theory.html">Keypads</a>
-        <a href="https://thmscmpg.github.io/CircuitNotes/docs/oled-buzzer-theory.html">OLED & Buzzer</a>
-        <a href="https://thmscmpg.github.io/CircuitNotes/docs/seven-segment-dip.html">7-Segment</a>
-    </div>
-        
-<nav class="navbar">
-        <div class="container">
-            <a href="https://github.com/THMSCMPG" class="logo"><i class="fas fa-bolt-lightning" target="_blank" rel="noopener noreferrer"></i> THMSCMPG</a>
-            <ul class="nav-links">
-                <li><a href="https://thmscmpg.github.io/">Home</a></li>
-                <li><a href="https://thmscmpg.github.io/projects.html">Research</a></li>
-                <li><a href="https://thmscmpg.github.io/reports.html">Lab Reports</a></li>
-                <li><a href="https://thmscmpg.github.io/assets/Campagna_CV_2025.pdf" target="_blank" rel="noopener noreferrer">CV</a></li>
-                <li><a href="https://thmscmpg.github.io/CircuitNotes/">CircuitNotes</a></li>
-                <li><a href="https://thmscmpg.github.io/CircuitNotes/docs/master-reference.html">Master Ref</a></li>
-                
-                <li class="dropdown">
-                <span class="nav-label">Jump to Docs</i></span>
-                <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-bars"></i></a>
-                <div class="dropdown-content">
-                    <a href="https://thmscmpg.github.io/CircuitNotes/docs/basic-5v-circuits.html">Basic 5V DC</a>
-                    <a href="https://thmscmpg.github.io/CircuitNotes/docs/led-demos.html">LED Demos</a>
-                    <a href="https://thmscmpg.github.io/CircuitNotes/docs/rgb-led-demos.html">RGB LED</a>
-                    <a href="https://thmscmpg.github.io/CircuitNotes/docs/photoresistor-demos.html">Photoresistors</a>
-                    <a href="https://thmscmpg.github.io/CircuitNotes/docs/rotary-encoder-demos.html">Rotary Encoders</a>
-                    <a href="https://thmscmpg.github.io/CircuitNotes/docs/matrix-keypad-theory.html">Keypads</a>
-                    <a href="https://thmscmpg.github.io/CircuitNotes/docs/oled-buzzer-theory.html">OLED & Buzzer</a>
-                    <a href="https://thmscmpg.github.io/CircuitNotes/docs/seven-segment-dip.html">7-Segment</a>
-                </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
 <h1>📺 OLED Display Technology</h1>
 
 <div class="demo-section">
@@ -345,5 +281,4 @@ Where f₀ = resonant frequency, Δf = bandwidth
     }
 </script>
         
-</body>
-</html>
+

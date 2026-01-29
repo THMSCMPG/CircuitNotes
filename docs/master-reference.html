@@ -1,77 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arduino Components Master Reference</title>
-<style>
-h1 {color: #2c3e50; text-align: center; font-size: 2.5em; margin-bottom: 10px; border-bottom: 4px solid #3498db; padding-bottom: 15px;}
-.subtitle {text-align: center; color: #7f8c8d; font-size: 1.2em; margin-bottom: 30px;}
-.section {background: #f8f9fa; padding: 20px; margin: 20px 0; border-radius: 10px; border-left: 5px solid #3498db;}
-h2 {color: #34495e; margin-top: 0;}
-h3 {color: #16a085;}
-table {width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.9em;}
-th, td {border: 1px solid #bdc3c7; padding: 8px; text-align: left;}
-th {background: #34495e; color: white;}
-tr:nth-child(even) {background: #ecf0f1;}
-.component-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin: 20px 0;}
-.component-card {background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-left: 4px solid #e74c3c;}
-.component-card h4 {margin-top: 0; color: #e74c3c;}
-.tips-box {background: #d5f4e6; padding: 15px; border-left: 4px solid #27ae60; margin: 15px 0; border-radius: 5px;}
-.warning-box {background: #ffe6e6; padding: 15px; border-left: 4px solid #e74c3c; margin: 15px 0; border-radius: 5px;}
-.info-box {background: #e8f4f8; padding: 15px; border-left: 4px solid #3498db; margin: 15px 0; border-radius: 5px;}
-.formula {background: #fef5e7; padding: 10px; border-radius: 5px; font-family: 'Courier New', monospace; margin: 10px 0;}
-</style>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
+---
+layout: default
+title: Arduino Components Master Reference
+---
 
-<button class="menu-btn" onclick="toggleSidebar()">MENU &#9662;</button>
 
-    <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="close-btn" onclick="toggleSidebar()">&times;</a>
-        <a href="https://thmscmpg.github.io/">Home</a>
-        <a href="https://thmscmpg.github.io/CircuitNotes/">CircuitNotes</a>
-        <a href="https://thmscmpg.github.io/CircuitNotes/docs/master-reference.html">Master Ref</a>
-        <a href="https://thmscmpg.github.io/CircuitNotes/docs/basic-5v-circuits.html">Basic 5V DC</a>
-        <a href="https://thmscmpg.github.io/CircuitNotes/docs/led-demos.html">LED Demos</a>
-        <a href="https://thmscmpg.github.io/CircuitNotes/docs/rgb-led-demos.html">RGB LED</a>
-        <a href="https://thmscmpg.github.io/CircuitNotes/docs/photoresistor-demos.html">Photoresistors</a>
-        <a href="https://thmscmpg.github.io/CircuitNotes/docs/rotary-encoder-demos.html">Rotary Encoders</a>
-        <a href="https://thmscmpg.github.io/CircuitNotes/docs/matrix-keypad-theory.html">Keypads</a>
-        <a href="https://thmscmpg.github.io/CircuitNotes/docs/oled-buzzer-theory.html">OLED & Buzzer</a>
-        <a href="https://thmscmpg.github.io/CircuitNotes/docs/seven-segment-dip.html">7-Segment</a>
-    </div>
-        
-<nav class="navbar">
-        <div class="container">
-            <a href="https://github.com/THMSCMPG" class="logo"><i class="fas fa-bolt-lightning"></i> THMSCMPG</a>
-            <ul class="nav-links">
-                <li><a href="https://thmscmpg.github.io/">Home</a></li>
-                <li><a href="https://thmscmpg.github.io/projects.html">Research</a></li>
-                <li><a href="https://thmscmpg.github.io/reports.html">Lab Reports</a></li>
-                <li><a href="https://thmscmpg.github.io/assets/Campagna_CV_2025.pdf" target="_blank" rel="noopener noreferrer">CV</a></li>
-                <li><a href="https://thmscmpg.github.io/CircuitNotes/">CircuitNotes</a></li>
-                <li><a href="https://thmscmpg.github.io/CircuitNotes/docs/master-reference.html">Master Ref</a></li>
-                
-                <li class="dropdown">
-                <span class="nav-label">Jump to Docs</i></span>
-                <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-bars" target="_blank" rel="noopener noreferrer"></i></a>
-                <div class="dropdown-content">
-                    <a href="https://thmscmpg.github.io/CircuitNotes/docs/basic-5v-circuits.html">Basic 5V DC</a>
-                    <a href="https://thmscmpg.github.io/CircuitNotes/docs/led-demos.html">LED Demos</a>
-                    <a href="https://thmscmpg.github.io/CircuitNotes/docs/rgb-led-demos.html">RGB LED</a>
-                    <a href="https://thmscmpg.github.io/CircuitNotes/docs/photoresistor-demos.html">Photoresistors</a>
-                    <a href="https://thmscmpg.github.io/CircuitNotes/docs/rotary-encoder-demos.html">Rotary Encoders</a>
-                    <a href="https://thmscmpg.github.io/CircuitNotes/docs/matrix-keypad-theory.html">Keypads</a>
-                    <a href="https://thmscmpg.github.io/CircuitNotes/docs/oled-buzzer-theory.html">OLED & Buzzer</a>
-                    <a href="https://thmscmpg.github.io/CircuitNotes/docs/seven-segment-dip.html">7-Segment</a>
-                </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
+
 <div class="container">
 <h1>🔧 Arduino Components Master Reference Guide</h1>
 <div class="subtitle">Complete Technical Documentation for Circuit Demonstrations</div>
@@ -511,5 +444,4 @@ Example: Yellow-Violet-Red-Gold = 47 × 100 ± 5% = 4.7kΩ ± 5%
     }
 </script>
         
-</body>
-</html>
+
