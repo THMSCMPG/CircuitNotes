@@ -3,16 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ page.description | default: site.description }}">
+    <meta name="author" content="Thomas Campagna">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="{{ page.title }} | Thomas Campagna">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:description" content="{{ page.description | default: site.description }}">
+    
     <title>{{ page.title }} | Thomas Campagna</title>
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-   <button class="menu-btn" onclick="toggleSidebar()">MENU &#9662;</button>
+    <!-- Mobile Menu Button -->
+    <button class="menu-btn" onclick="toggleSidebar()" aria-label="Toggle navigation menu">
+        MENU &#9662;
+    </button>
 
+    <!-- Mobile Sidebar Backdrop -->
+    <div id="sidebarBackdrop" class="sidebar-backdrop" onclick="closeSidebar()"></div>
+
+    <!-- Mobile Sidebar -->
     <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="close-btn" onclick="toggleSidebar()">&times;</a>
+        <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()" aria-label="Close menu">&times;</a>
         {% for i in (0..2) %}
             <a href="{{ site.data.navigation[i].link }}">{{ site.data.navigation[i].name }}</a>
         {% endfor %}
@@ -22,8 +40,18 @@
         <a href="{{ site.data.navigation[4].link }}">{{ site.data.navigation[4].name }}</a>
         <a href="{{ site.data.navigation[5].link }}">{{ site.data.navigation[5].name }}</a>
         <a href="{{ site.data.navigation[14].link }}">{{ site.data.navigation[14].name }}</a>
+        
+        <div style="padding: 20px 32px; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+            <div style="color: #94a3b8; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px;">
+                Jump to Docs
+            </div>
+            {% for i in (6..13) %}
+                <a href="{{ site.data.navigation[i].link }}" style="font-size: 0.95rem;">{{ site.data.navigation[i].name }}</a>
+            {% endfor %}
+        </div>
     </div>
     
+    <!-- Desktop Navbar -->
     <nav class="navbar">
         <div class="container">
             <a href="https://github.com/THMSCMPG/" class="logo" target="_blank" rel="noopener noreferrer">
@@ -53,38 +81,103 @@
         </div>
     </nav>
 
+    <!-- Page Header -->
     <header class="page-header">
         <div class="container">
             <h1>{{ page.title }}</h1>
         </div>
     </header>
 
+    <!-- Main Content Area -->
     <main class="container">
         <div class="content-area">
             {{ content }}
         </div>
     </main>
 
+    <!-- Footer -->
     <footer class="footer">
-        <p>Thomas Campagna | Physics & Mathematics</p>
+        <p><strong>Thomas Campagna</strong> | Physics & Mathematics</p>
         <p>&copy; 2026 CircuitNotes Project</p>
         <p style="font-size: 0.8rem; margin-top: 10px;">Created by THMSCMPG</p>
         <p style="font-size: 0.8rem; margin-top: 8px;">Licensed under the MIT License.</p>
         <div class="footer-social">
-            <a href="https://github.com/THMSCMPG" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
+            <a href="https://github.com/THMSCMPG" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-github"></i> GitHub
+            </a>
         </div>
     </footer>
 
+    <!-- JavaScript -->
     <script>
-    function toggleSidebar() {
-        const sidebar = document.getElementById("mySidebar");
-        // Check if the sidebar is open (250px) or closed (0)
-        if (sidebar.style.width === "250px") {
-            sidebar.style.width = "0";
-        } else {
-            sidebar.style.width = "250px";
+        // Sidebar state management
+        function toggleSidebar() {
+            const sidebar = document.getElementById("mySidebar");
+            const backdrop = document.getElementById("sidebarBackdrop");
+            const body = document.body;
+            
+            if (sidebar.style.width === "250px") {
+                closeSidebar();
+            } else {
+                openSidebar();
+            }
         }
-    }
-</script>
+
+        function openSidebar() {
+            const sidebar = document.getElementById("mySidebar");
+            const backdrop = document.getElementById("sidebarBackdrop");
+            const body = document.body;
+            
+            sidebar.style.width = "250px";
+            backdrop.classList.add("active");
+            body.classList.add("sidebar-open");
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById("mySidebar");
+            const backdrop = document.getElementById("sidebarBackdrop");
+            const body = document.body;
+            
+            sidebar.style.width = "0";
+            backdrop.classList.remove("active");
+            body.classList.remove("sidebar-open");
+        }
+
+        // Close sidebar on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const sidebar = document.getElementById("mySidebar");
+                if (sidebar.style.width === "250px") {
+                    closeSidebar();
+                }
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href !== 'javascript:void(0)') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Add loading class to external links
+        document.querySelectorAll('a[href^="http"]').forEach(link => {
+            if (!link.hostname.includes(window.location.hostname)) {
+                link.addEventListener('click', function() {
+                    this.style.opacity = '0.6';
+                });
+            }
+        });
+    </script>
 </body>
 </html>

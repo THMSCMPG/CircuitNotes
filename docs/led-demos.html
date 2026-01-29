@@ -3,293 +3,32 @@ layout: default
 title: LED Circuit Demonstrations
 ---
 
+<!-- 
+NOTE: This is a placeholder file.
+Copy the content from your original led-demos.html file here,
+but REMOVE the following sections at the end:
+1. <footer class="footer">...</footer>
+2. <script>...</script>
+3. Any <h1> tags (the layout provides this)
 
+The layout (default.html) will automatically provide:
+- The page header with title
+- Navigation (desktop navbar and mobile sidebar)
+- Footer with your info
+- All necessary JavaScript
 
-<h1>🔆 LED Circuit Demonstrations</h1>
- 
-<div class="demo-section">
-<h2>Demo 1: LED Binary Counter (8-bit)</h2>
-
-<h3>Circuit Diagram</h3>
-<div class="circuit-diagram">
-Arduino Uno
-                                
-Pin 2  ---[220Ω]---LED1---|>|---GND  (LSB - Bit 0)
-Pin 3  ---[220Ω]---LED2---|>|---GND  (Bit 1)
-Pin 4  ---[220Ω]---LED3---|>|---GND  (Bit 2)
-Pin 5  ---[220Ω]---LED4---|>|---GND  (Bit 3)
-Pin 6  ---[220Ω]---LED5---|>|---GND  (Bit 4)
-Pin 7  ---[220Ω]---LED6---|>|---GND  (Bit 5)
-Pin 8  ---[220Ω]---LED7---|>|---GND  (Bit 6)
-Pin 9  ---[220Ω]---LED8---|>|---GND  (MSB - Bit 7)
-
-Note: ---|>|--- represents LED with anode (+) on left, cathode (-) on right
-</div>
-
-<h3>Theory & Physics</h3>
-<div class="theory-box">
-<strong>LED Operation:</strong> Light Emitting Diodes are semiconductor devices that emit light when current flows through them in the forward direction. They exhibit a threshold voltage (Vf) that must be exceeded for conduction.
-
-<br><br><strong>Key Parameters:</strong>
-<ul>
-<li><strong>Forward Voltage (Vf):</strong> Red LEDs typically 1.8-2.2V, Green/Yellow 2.0-2.4V, Blue/White 3.0-3.6V</li>
-<li><strong>Forward Current (If):</strong> Standard LEDs operate at 10-20mA, optimal at ~15mA</li>
-<li><strong>Maximum Current:</strong> Typically 30mA continuous, 50mA peak</li>
-</ul>
-
-<strong>Binary Counting:</strong> This demo displays numbers 0-255 in binary notation, demonstrating positional number systems where each LED represents a power of 2.
-</div>
-
-<h3>Calculations</h3>
-<div class="math-box">
-<strong>Resistor Value Calculation (Ohm's Law):</strong><br>
-R = (Vsupply - Vf) / If<br><br>
-
-For a red LED:<br>
-- Vsupply = 5V (Arduino output)<br>
-- Vf = 2.0V (LED forward voltage)<br>
-- If = 15mA = 0.015A (desired current)<br><br>
-
-R = (5V - 2.0V) / 0.015A = 3.0V / 0.015A = 200Ω<br><br>
-
-<strong>We use 220Ω (standard value):</strong><br>
-Actual current: I = (5V - 2.0V) / 220Ω = 13.6mA ✓ (safe)<br><br>
-
-<strong>Power Dissipation:</strong><br>
-P = I² × R = (0.0136)² × 220 = 0.041W (41mW)<br>
-A standard 1/4W (250mW) resistor is more than adequate.
-</div>
-
-<h3>Arduino Code</h3>
-<div class="code-section">
-// LED Binary Counter
-const int LED_PINS[] = {2, 3, 4, 5, 6, 7, 8, 9};
-const int NUM_LEDS = 8;
-
-void setup() {
-  for(int i = 0; i < NUM_LEDS; i++) {
-    pinMode(LED_PINS[i], OUTPUT);
-  }
-  Serial.begin(9600);
-}
-
-void loop() {
-  for(int count = 0; count <= 255; count++) {
-    displayBinary(count);
-    Serial.print("Count: ");
-    Serial.print(count);
-    Serial.print(" Binary: ");
-    Serial.println(count, BIN);
-    delay(500);
-  }
-}
-
-void displayBinary(int num) {
-  for(int i = 0; i < NUM_LEDS; i++) {
-    int bit = (num >> i) & 1;  // Extract bit i
-    digitalWrite(LED_PINS[i], bit);
-  }
-}
-</div>
-
-<h3>Use Cases</h3>
-<ul>
-<li><strong>Computer Science Education:</strong> Visualizing binary numbers and bit manipulation</li>
-<li><strong>Digital Logic:</strong> Understanding parallel data representation</li>
-<li><strong>Counter Circuits:</strong> Visual feedback for counting systems</li>
-<li><strong>Data Bus Visualization:</strong> Demonstrating how computers transmit parallel data</li>
-</ul>
-</div>
+Just paste your content (demo-section divs, theory-boxes, etc.) here!
+-->
 
 <div class="demo-section">
-<h2>Demo 2: LED VU Meter (Audio Level Indicator)</h2>
-
-<h3>Circuit Diagram</h3>
-<div class="circuit-diagram">
-Arduino Uno
-
-Pin 2  ---[220Ω]---LED1---|>|---GND  (Level 1 - Lowest)
-Pin 3  ---[220Ω]---LED2---|>|---GND  (Level 2)
-Pin 4  ---[220Ω]---LED3---|>|---GND  (Level 3)
-Pin 5  ---[220Ω]---LED4---|>|---GND  (Level 4)
-Pin 6  ---[220Ω]---LED5---|>|---GND  (Level 5)
-Pin 7  ---[220Ω]---LED6---|>|---GND  (Level 6)
-Pin 8  ---[220Ω]---LED7---|>|---GND  (Level 7)
-Pin 9  ---[220Ω]---LED8---|>|---GND  (Level 8)
-Pin 10 ---[220Ω]---LED9---|>|---GND  (Level 9)
-Pin 11 ---[220Ω]---LED10--|>|---GND  (Level 10 - Peak)
-
-Optional: Analog Input Simulation
-A0 <--- Potentiometer/Audio Signal (0-5V)
+    <h2>Content goes here</h2>
+    <p>Copy your original content from led-demos.html</p>
+    <p>Remember to:</p>
+    <ul>
+        <li>✅ Keep all your circuit diagrams, theory boxes, code sections</li>
+        <li>✅ Keep all your tables and examples</li>
+        <li>❌ Remove duplicate footer at the end</li>
+        <li>❌ Remove duplicate script at the end</li>
+        <li>❌ Remove any &lt;h1&gt; tags</li>
+    </ul>
 </div>
-
-<h3>Theory & Physics</h3>
-<div class="theory-box">
-<strong>VU Meter Principle:</strong> Volume Unit meters display signal amplitude using a bar graph representation. Each LED represents a threshold level.
-
-<br><br><strong>Persistence of Vision:</strong> Human eyes can perceive changes at ~15-20 Hz. Rapid LED updates create smooth animation effects.
-
-<br><br><strong>Signal Quantization:</strong> Converting continuous analog signals into discrete levels is fundamental to digital signal processing (DSP).
-</div>
-
-<h3>Calculations</h3>
-<div class="math-box">
-<strong>Level Thresholds (10-level meter):</strong><br>
-For ADC range 0-1023:<br>
-- Level 1: >102 (10%)<br>
-- Level 2: >204 (20%)<br>
-- Level 3: >307 (30%)<br>
-- ...<br>
-- Level 10: >921 (90%)<br><br>
-
-Threshold(n) = (1023 × n) / 10<br><br>
-
-<strong>Voltage per level:</strong><br>
-ΔV = 5V / 10 levels = 0.5V per LED
-</div>
-
-<h3>Arduino Code</h3>
-<div class="code-section">
-// LED VU Meter
-const int LED_PINS[] = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
-const int NUM_LEDS = 10;
-const int ANALOG_PIN = A0;
-
-void setup() {
-  for(int i = 0; i < NUM_LEDS; i++) {
-    pinMode(LED_PINS[i], OUTPUT);
-  }
-  Serial.begin(9600);
-}
-
-void loop() {
-  // Simulated VU meter with sine wave
-  static unsigned long lastTime = 0;
-  unsigned long currentTime = millis();
-  
-  // Generate test signal (0-1023)
-  float angle = (currentTime / 1000.0) * 2 * PI; // 1 Hz cycle
-  int level = (int)((sin(angle) + 1.0) * 511.5); // 0-1023
-  
-  // Display on LEDs
-  displayLevel(level);
-  
-  // Alternatively, use actual analog input:
-  // int level = analogRead(ANALOG_PIN);
-  // displayLevel(level);
-  
-  delay(50); // Update rate: 20 Hz
-}
-
-void displayLevel(int value) {
-  int numLit = map(value, 0, 1023, 0, NUM_LEDS);
-  
-  for(int i = 0; i < NUM_LEDS; i++) {
-    digitalWrite(LED_PINS[i], i < numLit ? HIGH : LOW);
-  }
-  
-  Serial.print("Level: ");
-  Serial.print(value);
-  Serial.print(" LEDs: ");
-  Serial.println(numLit);
-}
-</div>
-
-<h3>Use Cases</h3>
-<ul>
-<li><strong>Audio Equipment:</strong> Visual feedback for recording levels</li>
-<li><strong>Battery Indicators:</strong> Visual voltage level display</li>
-<li><strong>Process Control:</strong> Tank level, temperature, pressure visualization</li>
-<li><strong>Gaming Displays:</strong> Health bars, energy meters</li>
-</ul>
-</div>
-
-<div class="demo-section">
-<h2>Additional Technical Information</h2>
-
-<h3>LED Current Limiting - Critical Safety</h3>
-<div class="warning">
-<strong>⚠️ WARNING:</strong> Never connect an LED directly to a power source without a current-limiting resistor! LEDs have very low internal resistance and will draw excessive current, causing immediate destruction.
-</div>
-
-<table>
-<tr>
-<th>LED Color</th>
-<th>Typical Vf</th>
-<th>Resistor for 5V</th>
-<th>Current @ 220Ω</th>
-</tr>
-<tr>
-<td>Red</td>
-<td>1.8-2.2V</td>
-<td>150-220Ω</td>
-<td>12.7-14.5mA</td>
-</tr>
-<tr>
-<td>Yellow/Green</td>
-<td>2.0-2.4V</td>
-<td>180-220Ω</td>
-<td>11.8-13.6mA</td>
-</tr>
-<tr>
-<td>Blue/White</td>
-<td>3.0-3.6V</td>
-<td>100-150Ω</td>
-<td>9.3-13.3mA</td>
-</tr>
-</table>
-
-<h3>LED Physics Deep Dive</h3>
-<div class="theory-box">
-<strong>Semiconductor Bandgap:</strong> LEDs emit light when electrons transition from the conduction band to the valence band. The photon energy (and thus color) equals the bandgap energy:<br><br>
-
-E = hf = hc/λ<br><br>
-
-Where:<br>
-- E = Energy (Joules)<br>
-- h = Planck's constant (6.626 × 10⁻³⁴ J·s)<br>
-- f = Frequency (Hz)<br>
-- c = Speed of light (3 × 10⁸ m/s)<br>
-- λ = Wavelength (meters)<br><br>
-
-<strong>Example for Red LED (λ = 650nm):</strong><br>
-E = (6.626 × 10⁻³⁴ × 3 × 10⁸) / (650 × 10⁻⁹)<br>
-E = 3.06 × 10⁻¹⁹ J = 1.91 eV<br><br>
-
-This matches the ~2V forward voltage drop!
-</div>
-
-<h3>PWM Dimming (Bonus)</h3>
-<div class="theory-box">
-LEDs can be dimmed using Pulse Width Modulation (PWM). Instead of reducing current (which can shift color), PWM rapidly switches the LED on/off. The duty cycle determines apparent brightness.<br><br>
-
-<strong>Duty Cycle:</strong> Percentage of time signal is HIGH<br>
-- 0% = OFF<br>
-- 50% = Half brightness<br>
-- 100% = Full brightness<br><br>
-
-Arduino's analogWrite(pin, value) uses 8-bit PWM (0-255) at ~490 Hz.
-</div>
-</div>
-
-    <footer class="footer">
-        <p>Thomas Campagna | Physics & Mathematics</p>
-        <p>&copy; 2026 CircuitNotes Project</p>
-            <p style="font-size: 0.8rem; margin-top: 10px;">Created by THMSCMPG</p>
-            <p style="font-size: 0.8rem; margin-top: 8px;">Licensed under the MIT License.</p>
-        <li><a href="https://github.com/THMSCMPG"><i class="fab fa-github" target="_blank" rel="noopener noreferrer"</i>GitHub</a></li>
-    </footer>
-
-<script>
-    function toggleSidebar() {
-        const sidebar = document.getElementById("mySidebar");
-        // Check if the sidebar is open (250px) or closed (0)
-        if (sidebar.style.width === "250px") {
-            sidebar.style.width = "0";
-        } else {
-            sidebar.style.width = "250px";
-        }
-    }
-</script>
-    
-

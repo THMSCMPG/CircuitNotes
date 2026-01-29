@@ -1,40 +1,30 @@
-- name: Home # 0
+- name: Home
   link: https://thmscmpg.github.io/index.html
-- name: Research # 1
+- name: Research
   link: https://thmscmpg.github.io/projects.html
-- name: LabReports # 2
+- name: LabReports
   link: https://thmscmpg.github.io/reports.html
-- name: CV # 3
+- name: CV
   link: https://thmscmpg.github.io/assets/Campagna_CV_2025.pdf
-- name: CircuitNotes # 4
+- name: CircuitNotes
   link: https://thmscmpg.github.io/CircuitNotes/index.html
-- name: MasterRef # 5
+- name: MasterRef
   link: https://thmscmpg.github.io/CircuitNotes/master-reference.html
-- name: BasicCircuits # 6
+- name: BasicCircuits
   link: https://thmscmpg.github.io/CircuitNotes/basic-5v-circuits.html
-- name: LED # 7
+- name: LED
   link: https://thmscmpg.github.io/CircuitNotes/led-demos.html
-- name: Matrix # 8
+- name: Matrix
   link: https://thmscmpg.github.io/CircuitNotes/matrix-keypad-theory.html
-- name: OLED # 9
+- name: OLED
   link: https://thmscmpg.github.io/CircuitNotes/oled-buzzer-theory.html
-- name: Photoresistor # 10
+- name: Photoresistor
   link: https://thmscmpg.github.io/CircuitNotes/photoresistor-demos.html
-- name: RGBLED # 11
+- name: RGBLED
   link: https://thmscmpg.github.io/CircuitNotes/rgb-led-demos.html
-- name: Rotary # 12
+- name: Rotary
   link: https://thmscmpg.github.io/CircuitNotes/rotary-encoder-demos.html
-- name: SevenDip # 13
+- name: SevenDip
   link: https://thmscmpg.github.io/CircuitNotes/seven-segment-dip.html
-- name: Landing # 14
+- name: Landing
   link: https://thmscmpg.github.io/AURA-MF/index.html
-- name: SimV1 # 15
-  link: https://thmscmpg.github.io/AURA-MF/pages/simv1-gold-standard.html
-- name: SimV2 # 16
-  link: https://thmscmpg.github.io/AURA-MF/pages/simv2-multifidelity.html
-- name: SimV3 # 17
-  link: https://thmscmpg.github.io/AURA-MF/pages/simv3-bayesian.html
-- name: SimV4 # 18
-  link: https://thmscmpg.github.io/AURA-MF/pages/simv4-ml-orchestrator.html
-- name: Dash # 19
-  link: https://thmscmpg.github.io/AURA-MF/pages/interactive/dashboard.html
