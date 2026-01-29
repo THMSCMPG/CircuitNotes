@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} | Thomas Campagna</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <button class="menu-btn" onclick="toggleSidebar()">MENU &#9662;</button>
+
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="toggleSidebar()">&times;</a>
+                <li><a href="{{ site.data.navigation[0].link }}">{{ site.data.navigation[0].name }}</a></li>
+                <li><a href="{{ site.data.navigation[1].link }}">{{ site.data.navigation[1].name }}</a></li>
+                <li><a href="{{ site.data.navigation[2].link }}">{{ site.data.navigation[2].name }}</a></li>
+                <li><a href="{{ site.data.navigation[3].link }}">{{ site.data.navigation[3].name }}</a></li>
+                <li><a href="{{ site.data.navigation[4].link }}">{{ site.data.navigation[4].name }}</a></li>
+                <li><a href="{{ site.data.navigation[5].link }}">{{ site.data.navigation[5].name }}</a></li>
+        <a href="https://thmscmpg.github.io/assets/Campagna_CV_2025.pdf" target="_blank" rel="noopener noreferrer">CV</a>
+       
+    </div>
+    
+    <nav class="navbar">
+        <div class="container">
+            <a href="https://github.com/THMSCMPG/" class="logo"><i class="fas fa-bolt-lightning" target="_blank" rel="noopener noreferrer"></i> THMSCMPG</a>
+            <ul class="nav-links">
+                <li><a href="{{ site.data.navigation[0].link }}">{{ site.data.navigation[0].name }}</a></li>
+                <li><a href="{{ site.data.navigation[1].link }}">{{ site.data.navigation[1].name }}</a></li>
+                <li><a href="{{ site.data.navigation[2].link }}">{{ site.data.navigation[2].name }}</a></li>
+                <li><a href="{{ site.data.navigation[3].link }}">{{ site.data.navigation[3].name }}</a></li>
+                <li><a href="{{ site.data.navigation[4].link }}">{{ site.data.navigation[4].name }}</a></li>
+                <li><a href="{{ site.data.navigation[5].link }}">{{ site.data.navigation[5].name }}</a></li>
+                
+                <li class="dropdown">
+                <span class="nav-label">Jump to Docs</i></span>
+                <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-bars"></i></a>
+                <div class="dropdown-content">
+                    <li><a href="{{ site.data.navigation[6].link }}">{{ site.data.navigation[6].name }}</a></li>
+                    <li><a href="{{ site.data.navigation[7].link }}">{{ site.data.navigation[7].name }}</a></li>
+                    <li><a href="{{ site.data.navigation[8].link }}">{{ site.data.navigation[8].name }}</a></li>
+                    <li><a href="{{ site.data.navigation[9].link }}">{{ site.data.navigation[9].name }}</a></li>
+                    <li><a href="{{ site.data.navigation[10].link }}">{{ site.data.navigation[10].name }}</a></li>
+                    <li><a href="{{ site.data.navigation[11].link }}">{{ site.data.navigation[12].name }}</a></li>
+                    <li><a href="{{ site.data.navigation[13].link }}">{{ site.data.navigation[13].name }}</a></li>
+                    <li><a href="{{ site.data.navigation[14].link }}">{{ site.data.navigation[14].name }}</a></li>
+                </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <h1>{{ page.title }}</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="content-area">
+            {{ content }}
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>Thomas Campagna | Physics & Mathematics</p>
+        <p>&copy; 2026 CircuitNotes Project</p>
+            <p style="font-size: 0.8rem; margin-top: 10px;">Created by THMSCMPG</p>
+            <p style="font-size: 0.8rem; margin-top: 8px;">Licensed under the MIT License.</p>
+        <li><a href="https://github.com/THMSCMPG"><i class="fab fa-github" target="_blank" rel="noopener noreferrer"</i>GitHub</a></li>
+    </footer>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById("mySidebar");
+            // Check if the sidebar is open (250px) or closed (0)
+            if (sidebar.style.width === "250px") {
+                sidebar.style.width = "0";
+            } else {
+                sidebar.style.width = "250px";
+            }
+        }
+    </script>
+</body>
+</html>
