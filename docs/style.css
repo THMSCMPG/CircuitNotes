@@ -53,7 +53,7 @@ body.sidebar-open {
     left: 0;
     margin-bottom: 0;
     z-index: 1000;
-    padding: 15px 0;
+    padding: auto;
     overflow: visible; /* Critical for dropdown visibility */
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
