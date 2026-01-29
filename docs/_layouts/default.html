@@ -76,10 +76,15 @@
     </footer>
 
     <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById("mySidebar");
-            sidebar.style.width = (sidebar.style.width === "250px") ? "0" : "250px";
+    function toggleSidebar() {
+        const sidebar = document.getElementById("mySidebar");
+        // Check if the sidebar is open (250px) or closed (0)
+        if (sidebar.style.width === "250px") {
+            sidebar.style.width = "0";
+        } else {
+            sidebar.style.width = "250px";
         }
-    </script>
+    }
+</script>
 </body>
 </html>
