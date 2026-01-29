@@ -332,7 +332,7 @@ body.sidebar-open {
 .page-header {
     background: linear-gradient(135deg, var(--dark) 0%, var(--dark-muted) 100%);
     color: white;
-    padding: 60px 0 40px;
+    padding: auto;
     border-bottom: 3px solid var(--primary);
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
