@@ -51,7 +51,7 @@ body.sidebar-open {
     position: fixed;
     top: 0;
     left: 0;
-    margin-bottom: 25 !important;
+    margin-bottom: 35 !important;
     z-index: 1000;
     padding: 0 !important;
     overflow: visible; /* Critical for dropdown visibility */
@@ -330,8 +330,7 @@ body.sidebar-open {
    PAGE HEADER
    ============================================ */
 .page-header {
-    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-muted) 100%);
-    color: white;
+    background: var(--dark-muted) 100%;
     padding: 0;
     margin-top: 0 !important;
     border-bottom: 3px solid var(--primary);
