@@ -1,34 +1,233 @@
 ---
 layout: default
-title: 7-Segment Display and DIP Switch
+title:7️⃣ Seven-Segment Display and DIP Switch
 ---
 
-<!-- 
-NOTE: This is a placeholder file.
-Copy the content from your original seven-segment-dip.html file here,
-but REMOVE the following sections at the end:
-1. <footer class="footer">...</footer>
-2. <script>...</script>
-3. Any <h1> tags (the layout provides this)
+<div class="demo-section">
+<h2>Display Structure and Theory</h2>
 
-The layout (default.html) will automatically provide:
-- The page header with title
-- Navigation (desktop navbar and mobile sidebar)
-- Footer with your info
-- All necessary JavaScript
+<div class="theory-box">
+<strong>Seven-Segment Display:</strong><br>
+A 7-segment display consists of seven LEDs (segments) arranged in a figure-8 pattern, plus an optional decimal point. By lighting different combinations of segments, we can display digits 0-9 and some letters.
 
-Just paste your content (demo-section divs, theory-boxes, etc.) here!
--->
+<br><br><strong>Segment Labeling:</strong>
+<pre>
+     AAA
+    F   B
+    F   B
+     GGG
+    E   C
+    E   C
+     DDD   DP
+</pre>
+
+<strong>Types:</strong>
+<ul>
+<li><strong>Common Cathode:</strong> All cathodes connected together to GND. Set pins HIGH to light segments.</li>
+<li><strong>Common Anode:</strong> All anodes connected together to VCC. Set pins LOW to light segments.</li>
+</ul>
+</div>
+
+<h3>Segment-to-Pin Mapping</h3>
+<table>
+<tr><th>Segment</th><th>Position</th><th>Example Pin</th></tr>
+<tr><td>A</td><td>Top</td><td>Pin 2</td></tr>
+<tr><td>B</td><td>Top Right</td><td>Pin 3</td></tr>
+<tr><td>C</td><td>Bottom Right</td><td>Pin 4</td></tr>
+<tr><td>D</td><td>Bottom</td><td>Pin 5</td></tr>
+<tr><td>E</td><td>Bottom Left</td><td>Pin 6</td></tr>
+<tr><td>F</td><td>Top Left</td><td>Pin 7</td></tr>
+<tr><td>G</td><td>Middle</td><td>Pin 8</td></tr>
+<tr><td>DP</td><td>Decimal Point</td><td>Pin 9</td></tr>
+</table>
+
+<h3>Digit Encoding Table</h3>
+<table>
+<tr><th>Digit</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>Binary</th><th>Hex</th></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0111 1110</td><td>0x7E</td></tr>
+<tr><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0011 0000</td><td>0x30</td></tr>
+<tr><td>2</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0110 1101</td><td>0x6D</td></tr>
+<tr><td>3</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0111 1001</td><td>0x79</td></tr>
+<tr><td>4</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0011 0011</td><td>0x33</td></tr>
+<tr><td>5</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0101 1011</td><td>0x5B</td></tr>
+<tr><td>6</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0101 1111</td><td>0x5F</td></tr>
+<tr><td>7</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0111 0000</td><td>0x70</td></tr>
+<tr><td>8</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0111 1111</td><td>0x7F</td></tr>
+<tr><td>9</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0111 1011</td><td>0x7B</td></tr>
+</table>
+
+<h3>Current Limiting Calculations</h3>
+<div class="math-box">
+<strong>LED Specifications:</strong><br>
+Forward voltage (Vf): 2.0V (red segments)<br>
+Forward current (If): 10-20mA typical<br><br>
+
+<strong>Resistor Calculation per Segment:</strong><br>
+R = (Vsupply - Vf) / If<br>
+R = (5V - 2.0V) / 0.015A = 200Ω<br><br>
+
+Use 220Ω (standard value): I = 3V / 220Ω = 13.6mA ✓<br><br>
+
+<strong>Total Current (All Segments ON):</strong><br>
+8 segments × 13.6mA = 108.8mA<br><br>
+
+<strong>Note:</strong> Arduino pins can source ~40mA max, sink ~40mA max.<br>
+Solution: Use current-limiting resistors OR driver IC (74HC595, MAX7219)
+</div>
+
+<h3>Circuit Diagram - Common Cathode</h3>
+<div class="circuit-diagram">
+7-Segment Display (Common Cathode)
+
+Pin 2 ---[220Ω]---> Segment A
+Pin 3 ---[220Ω]---> Segment B
+Pin 4 ---[220Ω]---> Segment C
+Pin 5 ---[220Ω]---> Segment D
+Pin 6 ---[220Ω]---> Segment E
+Pin 7 ---[220Ω]---> Segment F
+Pin 8 ---[220Ω]---> Segment G
+Pin 9 ---[220Ω]---> Segment DP
+
+Common Pin(s) ----> GND
+</div>
+</div>
+
+<h1>🎛️ DIP Switch</h1>
 
 <div class="demo-section">
-    <h2>Content goes here</h2>
-    <p>Copy your original content from seven-segment-dip.html</p>
-    <p>Remember to:</p>
-    <ul>
-        <li>✅ Keep all your circuit diagrams, theory boxes, code sections</li>
-        <li>✅ Keep all your tables and examples</li>
-        <li>❌ Remove duplicate footer at the end</li>
-        <li>❌ Remove duplicate script at the end</li>
-        <li>❌ Remove any &lt;h1&gt; tags</li>
-    </ul>
+<h2>DIP Switch Theory and Operation</h2>
+
+<div class="theory-box">
+<strong>DIP Switch (Dual In-line Package):</strong><br>
+A DIP switch is a set of manual electric switches packaged in a standard IC form factor. Each switch can be independently set to ON or OFF.
+
+<br><br><strong>Common Types:</strong>
+<ul>
+<li><strong>SPST (Single Pole Single Throw):</strong> Simple ON/OFF per switch</li>
+<li><strong>Slide:</strong> Linear motion to toggle</li>
+<li><strong>Rocker:</strong> Rocking motion to toggle</li>
+<li><strong>Rotary:</strong> Circular positions</li>
+</ul>
+
+<strong>Typical Uses:</strong>
+<ul>
+<li>Configuration selection (address, mode)</li>
+<li>Binary input (8-bit DIP = 256 combinations)</li>
+<li>Feature enable/disable</li>
+<li>Hardware settings without code changes</li>
+</ul>
 </div>
+
+<h3>Pull-up vs Pull-down Configuration</h3>
+<table>
+<tr><th>Configuration</th><th>Switch OFF</th><th>Switch ON</th><th>Advantages</th></tr>
+<tr>
+<td><strong>Pull-up</strong><br>(resistor to +5V)</td>
+<td>Pin reads HIGH</td>
+<td>Pin reads LOW</td>
+<td>Uses INPUT_PULLUP mode<br>No external resistors needed</td>
+</tr>
+<tr>
+<td><strong>Pull-down</strong><br>(resistor to GND)</td>
+<td>Pin reads LOW</td>
+<td>Pin reads HIGH</td>
+<td>More intuitive (ON=HIGH)<br>Requires external resistors</td>
+</tr>
+</table>
+
+<h3>Circuit Diagram - Pull-up Configuration</h3>
+<div class="circuit-diagram">
+8-Position DIP Switch (Internal Pull-ups)
+
+Switch 1 --+---> Pin 2
+           |
+          GND
+
+Switch 2 --+---> Pin 3
+           |
+          GND
+
+Switch 3 --+---> Pin 4
+           |
+          GND
+
+... (continue for all switches)
+
+Configure pins with INPUT_PULLUP:
+pinMode(pin, INPUT_PULLUP);
+
+Reading:
+OFF = HIGH (pulled up to 5V)
+ON  = LOW  (connected to GND)
+</div>
+
+<h3>Binary Encoding Example</h3>
+<div class="math-box">
+<strong>8-bit DIP Switch as Binary Input:</strong><br><br>
+
+Switch positions (1=ON, 0=OFF): 0 0 1 0 1 1 0 1<br>
+Bit values (MSB to LSB): 2⁷ 2⁶ 2⁵ 2⁴ 2³ 2² 2¹ 2⁰<br><br>
+
+Decimal value = 0×128 + 0×64 + 1×32 + 0×16 + 1×8 + 1×4 + 0×2 + 1×1<br>
+             = 32 + 8 + 4 + 1<br>
+             = 45<br><br>
+
+<strong>Reading in Code:</strong><br>
+value = 0;<br>
+for(int i = 0; i < 8; i++) {<br>
+  if(digitalRead(pins[i]) == LOW) {  // ON<br>
+    value |= (1 << i);<br>
+  }<br>
+}
+</div>
+
+<h3>Debouncing Considerations</h3>
+<div class="theory-box">
+<strong>DIP Switch Debouncing:</strong><br>
+Unlike push buttons, DIP switches are typically toggled manually and held in position. However, they still exhibit mechanical bounce during the transition.
+
+<br><br><strong>Solutions:</strong>
+<ul>
+<li><strong>Software Delay:</strong> Read, wait 50ms, read again</li>
+<li><strong>State Change Detection:</strong> Only act on transitions, not continuous reading</li>
+<li><strong>Ignore During Setup:</strong> For configuration switches, read once at startup</li>
+</ul>
+</div>
+
+<h3>Common Applications</h3>
+<table>
+<tr><th>Switches</th><th>Range</th><th>Application</th></tr>
+<tr><td>4-bit</td><td>0-15</td><td>Device address, simple modes</td></tr>
+<tr><td>8-bit</td><td>0-255</td><td>Extended addressing, settings</td></tr>
+<tr><td>Individual</td><td>N/A</td><td>Feature flags, enable/disable</td></tr>
+</table>
+
+<h3>Use Cases</h3>
+<ul>
+<li><strong>Networking:</strong> Device ID, subnet configuration</li>
+<li><strong>Industrial Control:</strong> Machine mode selection</li>
+<li><strong>Embedded Systems:</strong> Boot mode, debug enable</li>
+<li><strong>Audio Equipment:</strong> Input selection, gain settings</li>
+<li><strong>Multi-Device Systems:</strong> Address assignment</li>
+</ul>
+</div>
+
+<div class="demo-section">
+<h2>Combined Demo Concept: 7-Segment + DIP Switch</h2>
+
+<div class="theory-box">
+<strong>Demonstration Idea:</strong><br>
+Use a 4-bit DIP switch to select a hexadecimal digit (0-F) and display it on the 7-segment display. This demonstrates binary-to-hexadecimal conversion and visual output.
+
+<br><br><strong>System Operation:</strong>
+<ol>
+<li>Read 4-bit value from DIP switches (0-15)</li>
+<li>Convert to corresponding 7-segment pattern</li>
+<li>Display digit (0-9, A-F)</li>
+<li>Update display when switch changes</li>
+</ol>
+
+This creates an interactive binary-to-hex learning tool!
+</div>
+</div>
+    

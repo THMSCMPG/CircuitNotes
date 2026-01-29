@@ -1,34 +1,303 @@
 ---
 layout: default
-title: Matrix Keypad Theory
+title:⌨️ Matrix Keypad Theory
 ---
+        
+<div class="demo-section">
+<h2>Matrix Scanning Principle</h2>
 
-<!-- 
-NOTE: This is a placeholder file.
-Copy the content from your original matrix-keypad-theory.html file here,
-but REMOVE the following sections at the end:
-1. <footer class="footer">...</footer>
-2. <script>...</script>
-3. Any <h1> tags (the layout provides this)
+<div class="theory-box">
+<strong>Why Matrix Configuration?</strong><br>
+A 4×4 keypad has 16 keys. Without matrix scanning, we'd need 16 individual input pins. With matrix scanning, we only need 8 pins (4 rows + 4 columns), saving 50% of I/O resources.
 
-The layout (default.html) will automatically provide:
-- The page header with title
-- Navigation (desktop navbar and mobile sidebar)
-- Footer with your info
-- All necessary JavaScript
+<br><br><strong>General Formula:</strong><br>
+For an M×N keypad:<br>
+- Direct wiring: M × N pins required<br>
+- Matrix scanning: M + N pins required<br>
+- Pin savings increase with larger keypads
 
-Just paste your content (demo-section divs, theory-boxes, etc.) here!
--->
+<br><br><strong>Example Savings:</strong>
+<ul>
+<li>3×4 keypad: 12 keys → 7 pins (vs 12 pins)</li>
+<li>4×4 keypad: 16 keys → 8 pins (vs 16 pins)</li>
+<li>8×8 keypad: 64 keys → 16 pins (vs 64 pins)</li>
+</ul>
+</div>
+
+<h3>Standard 4×4 Keypad Layout</h3>
+<div class="key-grid">
+<div class="key">1</div><div class="key">2</div><div class="key">3</div><div class="key">A</div>
+<div class="key">4</div><div class="key">5</div><div class="key">6</div><div class="key">B</div>
+<div class="key">7</div><div class="key">8</div><div class="key">9</div><div class="key">C</div>
+<div class="key">*</div><div class="key">0</div><div class="key">#</div><div class="key">D</div>
+</div>
+
+<h3>Matrix Structure</h3>
+<div class="circuit-diagram">
+Internal Keypad Structure (Simplified):
+
+          COL1  COL2  COL3  COL4
+           |     |     |     |
+ROW1 -----+--●--+--●--+--●--+--●
+           | [1]  | [2]  | [3]  | [A]
+           |     |     |     |
+ROW2 -----+--●--+--●--+--●--+--●
+           | [4]  | [5]  | [6]  | [B]
+           |     |     |     |
+ROW3 -----+--●--+--●--+--●--+--●
+           | [7]  | [8]  | [9]  | [C]
+           |     |     |     |
+ROW4 -----+--●--+--●--+--●--+--●
+           | [*]  | [0]  | [#]  | [D]
+
+Each ● represents a momentary switch (key)
+When pressed, it connects the row to the column
+</div>
+
+<h3>Scanning Algorithm</h3>
+<div class="theory-box">
+<strong>Step-by-Step Scanning Process:</strong>
+<ol>
+<li><strong>Initialize:</strong> Set all row pins as OUTPUT (HIGH), all column pins as INPUT with pull-up resistors (HIGH by default)</li>
+<li><strong>Scan:</strong> For each row:
+  <ul>
+    <li>Set that row LOW, keep others HIGH</li>
+    <li>Read all column pins</li>
+    <li>If any column reads LOW, key at (row, col) is pressed</li>
+    <li>Set row back to HIGH</li>
+  </ul>
+</li>
+<li><strong>Repeat:</strong> Continuously scan all rows (typically 10-100 times per second)</li>
+<li><strong>Debounce:</strong> Ignore rapid changes to filter mechanical bounce</li>
+</ol>
+
+<strong>Example Detection:</strong><br>
+If Row 2 is set LOW and Column 3 reads LOW → Key "6" is pressed
+</div>
+
+<h3>Timing Diagram</h3>
+<div class="circuit-diagram">
+When Key "5" is pressed (Row 2, Column 2):
+
+Time:     t0    t1    t2    t3    t4
+          |     |     |     |     |
+Row 1:  ──┐   ┌───────────────────
+          └───┘
+
+Row 2:  ──────┐   ┌───────────────
+              └───┘  ↑ Set LOW
+
+Row 3:  ──────────────┐   ┌───────
+                      └───┘
+
+Row 4:  ────────────────────┐   ┌─
+                            └───┘
+
+Col 2:  ──────┐       ┌───────────
+              └───────┘  ↓ Reads LOW
+              Key "5" detected!
+</div>
+</div>
 
 <div class="demo-section">
-    <h2>Content goes here</h2>
-    <p>Copy your original content from matrix-keypad-theory.html</p>
-    <p>Remember to:</p>
-    <ul>
-        <li>✅ Keep all your circuit diagrams, theory boxes, code sections</li>
-        <li>✅ Keep all your tables and examples</li>
-        <li>❌ Remove duplicate footer at the end</li>
-        <li>❌ Remove duplicate script at the end</li>
-        <li>❌ Remove any &lt;h1&gt; tags</li>
-    </ul>
+<h2>Electrical Characteristics</h2>
+
+<h3>Key Switch Specifications</h3>
+<table>
+<tr><th>Parameter</th><th>Typical Value</th></tr>
+<tr><td>Contact Resistance (Closed)</td><td>< 100Ω</td></tr>
+<tr><td>Insulation Resistance (Open)</td><td>> 100MΩ</td></tr>
+<tr><td>Operating Force</td><td>100-200 gf (gram-force)</td></tr>
+<tr><td>Operating Travel</td><td>0.5-1.0 mm</td></tr>
+<tr><td>Life Expectancy</td><td>1-10 million operations</td></tr>
+<tr><td>Bounce Time</td><td>5-20 ms</td></tr>
+</table>
+
+<h3>Debouncing Requirements</h3>
+<div class="math-box">
+<strong>Contact Bounce:</strong><br>
+When a key is pressed, mechanical contacts don't close cleanly. They "bounce" (make and break contact rapidly) for 5-20ms before settling.
+
+<br><br><strong>Software Debounce Implementation:</strong><br>
+<code>
+1. Detect key press<br>
+2. Wait 10-20ms<br>
+3. Read key again<br>
+4. If still pressed → valid<br>
+5. If not pressed → ignore (was noise)
+</code>
+
+<br><br><strong>Hardware Debounce (RC Filter):</strong><br>
+R = 10kΩ, C = 0.1µF<br>
+Time constant τ = R × C = 1ms<br>
+Settling time ≈ 5τ = 5ms<br><br>
+
+However, software debouncing is preferred for matrix keypads as the Keypad library handles it automatically.
 </div>
+
+<h3>Pull-up Resistor Analysis</h3>
+<div class="math-box">
+<strong>Why Pull-up Resistors?</strong><br>
+Column pins need a defined HIGH state when no key is pressed. Pull-up resistors (10kΩ typical) ensure pins don't "float" at undefined voltages.
+
+<br><br><strong>Current Calculation:</strong><br>
+When key is pressed (column connected to LOW row):<br>
+I = Vcc / Rpullup = 5V / 10kΩ = 0.5mA<br><br>
+
+This is well within Arduino's 40mA pin limit and provides reliable detection.
+
+<br><br><strong>Internal vs External Pull-ups:</strong><br>
+Arduino has internal pull-up resistors (~20-50kΩ) that can be enabled with INPUT_PULLUP mode. These are sufficient for keypad use and eliminate the need for external resistors.
+</div>
+</div>
+
+<div class="demo-section">
+<h2>Advanced Topics</h2>
+
+<h3>Multi-Key Detection</h3>
+<div class="theory-box">
+<strong>Limitation:</strong> Simple matrix scanning cannot reliably detect more than 2 simultaneous key presses due to "ghosting."
+
+<br><br><strong>Ghosting Phenomenon:</strong><br>
+If keys (R1,C1), (R1,C2), and (R2,C1) are pressed, the scanner may falsely detect (R2,C2) as pressed due to current paths through the matrix.
+
+<br><br><strong>Solutions:</strong>
+<ul>
+<li><strong>Blocking Diodes:</strong> Add diode in series with each switch (1N4148) to prevent reverse current. Increases cost and complexity.</li>
+<li><strong>Software:</strong> Ignore simultaneous presses or implement rollover algorithms</li>
+<li><strong>Design:</strong> For most applications (calculators, PIN entry, phone dialers), single-key operation is sufficient</li>
+</ul>
+</div>
+
+<h3>Scan Rate Optimization</h3>
+<div class="math-box">
+<strong>Scan Rate Requirements:</strong><br>
+Human typing speed: ~5-10 keys/second<br>
+Required detection rate: >20 Hz (Nyquist theorem)<br>
+Typical implementation: 50-100 Hz<br><br>
+
+<strong>Timing Analysis:</strong><br>
+Per-row scan time: ~1ms (including debounce)<br>
+Total scan cycle (4 rows): 4ms<br>
+Scan frequency: 1000ms / 4ms = 250 Hz ✓<br><br>
+
+This provides plenty of margin for reliable detection.
+</div>
+
+<h3>Power Consumption</h3>
+<div class="math-box">
+<strong>Idle State (no keys pressed):</strong><br>
+Pull-up current per column: I = 5V / 50kΩ = 0.1mA (internal pullup)<br>
+4 columns × 0.1mA = 0.4mA total<br><br>
+
+<strong>Active State (one key pressed):</strong><br>
+Additional current: ~0.5mA (through closed switch)<br>
+Total: ~0.9mA<br><br>
+
+<strong>Battery Life Estimate:</strong><br>
+CR2032 coin cell: 220mAh<br>
+Continuous scanning: 220mAh / 0.9mA = 244 hours (10 days)<br>
+With sleep mode (1% duty cycle): 24,400 hours (3 years)
+</div>
+
+<h3>Keypad Library Internals</h3>
+<div class="theory-box">
+<strong>Keypad Library Features:</strong>
+<ul>
+<li>Automatic matrix scanning</li>
+<li>Built-in debouncing (10ms default)</li>
+<li>Event detection (PRESSED, RELEASED, HOLD)</li>
+<li>Key state management</li>
+<li>Multiple keypad support</li>
+</ul>
+
+<strong>Key States:</strong>
+<ul>
+<li><strong>IDLE:</strong> No key activity</li>
+<li><strong>PRESSED:</strong> Key just pressed</li>
+<li><strong>HOLD:</strong> Key held down (after hold time threshold)</li>
+<li><strong>RELEASED:</strong> Key just released</li>
+</ul>
+</div>
+</div>
+
+<div class="demo-section">
+<h2>Practical Applications</h2>
+
+<h3>Common Use Cases</h3>
+<table>
+<tr><th>Application</th><th>Keypad Type</th><th>Example</th></tr>
+<tr><td>Security Systems</td><td>3×4, 4×4</td><td>PIN entry, alarm codes</td></tr>
+<tr><td>Telephones</td><td>3×4</td><td>Dialers, intercoms</td></tr>
+<tr><td>Calculators</td><td>4×4, 4×5</td><td>Scientific, basic calculators</td></tr>
+<tr><td>Point-of-Sale</td><td>4×4, 5×4</td><td>Payment terminals, registers</td></tr>
+<tr><td>Industrial Control</td><td>4×4, custom</td><td>Machine interfaces, HMI</td></tr>
+<tr><td>Gaming</td><td>Custom matrices</td><td>Arcade buttons, controllers</td></tr>
+<tr><td>Music</td><td>Custom sizes</td><td>MIDI controllers, drum pads</td></tr>
+</table>
+
+<h3>Design Considerations</h3>
+<div class="theory-box">
+<strong>Layout Design:</strong>
+<ul>
+<li>Standard layouts improve usability (phone, calculator familiar to users)</li>
+<li>Key spacing: 15-20mm for comfortable pressing</li>
+<li>Tactile feedback improves user experience</li>
+<li>Backlit keys for low-light environments</li>
+</ul>
+
+<strong>Reliability:</strong>
+<ul>
+<li>Choose switches with appropriate life rating for application</li>
+<li>Membrane keypads for sealed, waterproof designs</li>
+<li>Mechanical switches for tactile feedback and durability</li>
+<li>Consider environmental factors (dust, moisture, temperature)</li>
+</ul>
+
+<strong>Security:</strong>
+<ul>
+<li>Never display entered passwords in plain text</li>
+<li>Implement timeout mechanisms for sensitive applications</li>
+<li>Rate-limit attempts to prevent brute-force attacks</li>
+<li>Clear buffers after use to prevent data retention</li>
+</ul>
+</div>
+
+<h3>Interface Protocols</h3>
+<table>
+<tr><th>Protocol</th><th>Pins</th><th>Complexity</th><th>Use Case</th></tr>
+<tr><td>Direct Matrix</td><td>M + N</td><td>Low</td><td>Simple projects, learning</td></tr>
+<tr><td>I²C Expander</td><td>2 (SDA, SCL)</td><td>Medium</td><td>Pin conservation</td></tr>
+<tr><td>SPI Shift Register</td><td>3-4</td><td>Medium</td><td>Fast scanning needed</td></tr>
+<tr><td>Serial UART</td><td>1-2</td><td>Low</td><td>Remote keypads</td></tr>
+</table>
+</div>
+
+<div class="demo-section">
+<h2>Project Ideas</h2>
+
+<h3>Beginner Projects</h3>
+<ul>
+<li><strong>Calculator:</strong> Basic arithmetic with 7-segment or OLED display</li>
+<li><strong>PIN Lock:</strong> Electronic lock with correct code entry</li>
+<li><strong>Music Player:</strong> Each key plays a different note</li>
+<li><strong>Counter:</strong> Increment/decrement display with keypad input</li>
+</ul>
+
+<h3>Intermediate Projects</h3>
+<ul>
+<li><strong>Menu System:</strong> Navigate nested menus on LCD/OLED</li>
+<li><strong>Data Logger:</strong> Enter values and timestamps, save to SD card</li>
+<li><strong>Morse Code Trainer:</strong> Practice sending/receiving Morse code</li>
+<li><strong>Game Controller:</strong> Custom input device for Arduino games</li>
+</ul>
+
+<h3>Advanced Projects</h3>
+<ul>
+<li><strong>Safe Controller:</strong> Multi-combination electronic safe with timeout and lockout</li>
+<li><strong>MIDI Controller:</strong> Musical instrument with velocity-sensitive keys</li>
+<li><strong>Two-Factor Authentication:</strong> Keypad + RFID card reader security system</li>
+<li><strong>Scientific Calculator:</strong> Full-featured calculator with function library</li>
+</ul>
+</div>
+        

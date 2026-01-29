@@ -1,34 +1,261 @@
 ---
 layout: default
-title: OLED Display and Passive Buzzer
+title:📺 OLED Display and Passive Buzzer
 ---
 
-<!-- 
-NOTE: This is a placeholder file.
-Copy the content from your original oled-buzzer-theory.html file here,
-but REMOVE the following sections at the end:
-1. <footer class="footer">...</footer>
-2. <script>...</script>
-3. Any <h1> tags (the layout provides this)
+<div class="demo-section">
+<h2>OLED Physics and Operation</h2>
 
-The layout (default.html) will automatically provide:
-- The page header with title
-- Navigation (desktop navbar and mobile sidebar)
-- Footer with your info
-- All necessary JavaScript
+<div class="theory-box">
+<strong>OLED (Organic Light-Emitting Diode):</strong><br>
+Unlike LCD displays that require backlighting, OLEDs emit light when electric current passes through organic compounds. Each pixel is self-illuminating.
 
-Just paste your content (demo-section divs, theory-boxes, etc.) here!
--->
+<br><br><strong>Structure:</strong>
+<ul>
+<li>Cathode (negative electrode)</li>
+<li>Emissive organic layers</li>
+<li>Conductive organic layer</li>
+<li>Anode (positive electrode, transparent)</li>
+</ul>
+
+<strong>Advantages:</strong>
+<ul>
+<li>True black (pixels completely off)</li>
+<li>High contrast ratio (>100,000:1)</li>
+<li>Wide viewing angles (170°)</li>
+<li>Low power (only active pixels consume power)</li>
+<li>Fast response time (<1μs)</li>
+<li>No backlight needed</li>
+</ul>
+</div>
+
+<h3>128x64 OLED Specifications</h3>
+<table>
+<tr><th>Parameter</th><th>Value</th></tr>
+<tr><td>Resolution</td><td>128 × 64 pixels (8,192 total)</td></tr>
+<tr><td>Display Size</td><td>0.96" diagonal (typical)</td></tr>
+<tr><td>Pixel Size</td><td>~0.15mm × 0.15mm</td></tr>
+<tr><td>Driver IC</td><td>SSD1306 or compatible</td></tr>
+<tr><td>Interface</td><td>I2C (2-wire) or SPI (4-wire)</td></tr>
+<tr><td>Operating Voltage</td><td>3.3V - 5V</td></tr>
+<tr><td>Current Draw</td><td>~20mA (typical), ~40mA (max)</td></tr>
+<tr><td>Refresh Rate</td><td>~60 Hz</td></tr>
+</table>
+
+<h3>Memory Organization</h3>
+<div class="math-box">
+<strong>Display RAM Structure:</strong><br>
+128 columns × 8 pages × 8 bits = 8,192 pixels<br><br>
+
+Each page is 8 pixels tall (vertical byte-oriented):<br>
+- Page 0: rows 0-7<br>
+- Page 1: rows 8-15<br>
+- ...<br>
+- Page 7: rows 56-63<br><br>
+
+<strong>Memory Size:</strong><br>
+128 bytes/page × 8 pages = 1,024 bytes (1KB)<br><br>
+
+<strong>Pixel Addressing:</strong><br>
+Each bit controls one pixel (1=ON, 0=OFF)<br>
+Byte at column X, page Y controls pixels at (X, Y×8) through (X, Y×8+7)
+</div>
+
+<h3>I2C Communication</h3>
+<div class="theory-box">
+<strong>I2C Protocol:</strong> Two-wire serial interface (SDA=data, SCL=clock)
+
+<br><br><strong>Timing:</strong>
+<ul>
+<li>Standard mode: 100 kHz</li>
+<li>Fast mode: 400 kHz (common for OLED)</li>
+<li>Fast mode plus: 1 MHz</li>
+</ul>
+
+<strong>Address:</strong> 0x3C (common) or 0x3D<br>
+Binary: 0b0111100 + R/W bit
+
+<br><br><strong>Transaction Example:</strong><br>
+START → Address(0x3C) → ACK → Control(0x00) → ACK → Data → ACK → STOP
+</div>
+
+<h3>Power Consumption Analysis</h3>
+<div class="math-box">
+<strong>Current Draw vs Display Content:</strong><br><br>
+
+All pixels OFF: ~2mA (driver IC only)<br>
+50% pixels ON: ~20mA<br>
+All pixels ON: ~40mA<br><br>
+
+<strong>Energy per Refresh (60 Hz):</strong><br>
+At 5V, 20mA average:<br>
+Power = V × I = 5V × 0.02A = 0.1W<br>
+Energy/frame = 0.1W / 60 = 1.67mJ<br><br>
+
+<strong>Battery Life Estimate:</strong><br>
+AA battery: 2000mAh @ 1.5V = 3Wh<br>
+Runtime = 3Wh / 0.1W = 30 hours
+</div>
+</div>
+
+<h1>🔊 Passive Buzzer Technology</h1>
 
 <div class="demo-section">
-    <h2>Content goes here</h2>
-    <p>Copy your original content from oled-buzzer-theory.html</p>
-    <p>Remember to:</p>
-    <ul>
-        <li>✅ Keep all your circuit diagrams, theory boxes, code sections</li>
-        <li>✅ Keep all your tables and examples</li>
-        <li>❌ Remove duplicate footer at the end</li>
-        <li>❌ Remove duplicate script at the end</li>
-        <li>❌ Remove any &lt;h1&gt; tags</li>
-    </ul>
+<h2>Buzzer Physics and Operation</h2>
+
+<div class="theory-box">
+<strong>Passive vs Active Buzzers:</strong><br><br>
+
+<strong>Active Buzzer:</strong>
+<ul>
+<li>Contains internal oscillator</li>
+<li>Produces fixed frequency when powered</li>
+<li>Just needs DC voltage (simpler to use)</li>
+<li>Cannot change pitch</li>
+</ul>
+
+<strong>Passive Buzzer:</strong>
+<ul>
+<li>No internal oscillator</li>
+<li>Requires external square wave signal</li>
+<li>Frequency of input = frequency of sound</li>
+<li>Can produce different tones (musical)</li>
+<li>More versatile for melodies</li>
+</ul>
 </div>
+
+<h3>Sound Wave Physics</h3>
+<div class="theory-box">
+<strong>Sound Generation:</strong><br>
+Passive buzzers contain a piezoelectric element that vibrates when alternating voltage is applied. The vibration creates pressure waves in air.
+
+<br><br><strong>Key Relationships:</strong><br>
+Frequency (f) = Speed of sound (v) / Wavelength (λ)<br>
+v ≈ 343 m/s at 20°C<br><br>
+
+<strong>Human Hearing Range:</strong> 20 Hz - 20,000 Hz<br>
+<strong>Buzzer Effective Range:</strong> 100 Hz - 10,000 Hz<br>
+<strong>Most Pleasant Range:</strong> 500 Hz - 5,000 Hz
+</div>
+
+<h3>Musical Note Frequencies</h3>
+<table>
+<tr><th>Note</th><th>Frequency (Hz)</th><th>Wavelength (m)</th></tr>
+<tr><td>C4 (Middle C)</td><td>262</td><td>1.31</td></tr>
+<tr><td>D4</td><td>294</td><td>1.17</td></tr>
+<tr><td>E4</td><td>330</td><td>1.04</td></tr>
+<tr><td>F4</td><td>349</td><td>0.98</td></tr>
+<tr><td>G4</td><td>392</td><td>0.88</td></tr>
+<tr><td>A4 (Concert Pitch)</td><td>440</td><td>0.78</td></tr>
+<tr><td>B4</td><td>494</td><td>0.69</td></tr>
+<tr><td>C5</td><td>523</td><td>0.66</td></tr>
+</table>
+
+<h3>PWM Generation for Tones</h3>
+<div class="math-box">
+<strong>Arduino tone() Function:</strong><br>
+Generates square wave at specified frequency<br><br>
+
+Example: tone(pin, 440, 1000)<br>
+- Pin: Output pin<br>
+- 440: Frequency in Hz (A4 note)<br>
+- 1000: Duration in ms<br><br>
+
+<strong>Square Wave Characteristics:</strong><br>
+50% duty cycle (equal HIGH and LOW time)<br>
+Period (T) = 1 / frequency<br><br>
+
+For 440 Hz:<br>
+T = 1/440 = 2.27 ms<br>
+HIGH time = LOW time = 1.14 ms
+</div>
+
+<h3>Sound Pressure Level</h3>
+<div class="math-box">
+<strong>Decibel Scale (dB SPL):</strong><br>
+dB = 20 × log₁₀(P / P₀)<br><br>
+
+Where:<br>
+- P = Measured sound pressure<br>
+- P₀ = Reference pressure (20 μPa, threshold of hearing)<br><br>
+
+<strong>Typical Buzzer Output:</strong><br>
+80-95 dB at 10cm distance<br><br>
+
+<strong>Distance Effect:</strong><br>
+Sound intensity follows inverse square law:<br>
+I₂ = I₁ × (d₁/d₂)²<br><br>
+
+Doubling distance reduces intensity by 6 dB
+</div>
+
+<h3>Circuit Design</h3>
+<div class="circuit-diagram">
+Basic Passive Buzzer Connection:
+
+Arduino Pin 8 ---[100Ω]--- BUZZER(+)
+                             |
+                            GND
+
+Protection resistor (100Ω) limits current and
+reduces voltage spikes from inductive kickback.
+
+Alternative with transistor (for louder output):
+
+Pin 8 ---[1kΩ]---┐
+                 |
+             ┌───┴───┐
+             │ NPN   │
+             │2N2222 │
+             └───┬───┘
+                 |
+    BUZZER(+) ──┘
+                 |
+                GND
+</div>
+
+<h3>Resonant Frequency</h3>
+<div class="theory-box">
+<strong>Piezoelectric Resonance:</strong><br>
+Each buzzer has a resonant frequency where it's loudest and most efficient. This is typically 2-4 kHz for small buzzers.
+
+<br><br><strong>Quality Factor (Q):</strong><br>
+Q = f₀ / Δf<br>
+Where f₀ = resonant frequency, Δf = bandwidth
+
+<br><br>Higher Q = narrower bandwidth = louder at resonance but quieter elsewhere
+</div>
+
+<h3>Practical Applications</h3>
+<table>
+<tr><th>Application</th><th>Frequency Range</th><th>Pattern</th></tr>
+<tr><td>Alarm/Alert</td><td>2-4 kHz</td><td>Pulsed or warbling</td></tr>
+<tr><td>Notification</td><td>1-2 kHz</td><td>Short beeps</td></tr>
+<tr><td>Error/Warning</td><td>500-1000 Hz</td><td>Low, continuous</td></tr>
+<tr><td>Music/Melody</td><td>200-2000 Hz</td><td>Tonal sequence</td></tr>
+<tr><td>Morse Code</td><td>800-1200 Hz</td><td>Dot-dash pattern</td></tr>
+</table>
+</div>
+
+<div class="demo-section">
+<h2>Use Cases Summary</h2>
+
+<h3>OLED Display Applications</h3>
+<ul>
+<li><strong>Wearables:</strong> Smartwatches, fitness trackers</li>
+<li><strong>Instrumentation:</strong> Multimeters, oscilloscopes, sensor readouts</li>
+<li><strong>Embedded Systems:</strong> Status displays, user interfaces</li>
+<li><strong>Gaming:</strong> Handheld consoles, controller displays</li>
+<li><strong>IoT Devices:</strong> Smart home displays, environmental monitors</li>
+</ul>
+
+<h3>Passive Buzzer Applications</h3>
+<ul>
+<li><strong>User Interface:</strong> Tactile feedback, confirmation beeps</li>
+<li><strong>Alarms:</strong> Intrusion detection, timer alerts</li>
+<li><strong>Accessibility:</strong> Audio cues for visually impaired users</li>
+<li><strong>Toys:</strong> Sound effects, musical instruments</li>
+<li><strong>Industrial:</strong> Process completion signals, error warnings</li>
+</ul>
+</div>
+        
