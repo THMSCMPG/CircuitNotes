@@ -28,7 +28,7 @@ body {
     background-color: var(--light);
     color: var(--text);
     line-height: 1.6;
-    padding-top: 80px; /* Account for fixed navbar */
+    padding-top: 40px;
 }
 
 body.sidebar-open {
