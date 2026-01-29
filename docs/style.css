@@ -332,10 +332,16 @@ body.sidebar-open {
 .page-header {
     background: linear-gradient(135deg, var(--dark) 0%, var(--dark-muted) 100%);
     color: white;
-    padding: auto;
+    padding: 60px 0;
     margin-top: 0 !important;
     border-bottom: 3px solid var(--primary);
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.page-header .container {
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .page-header h1 {
@@ -348,6 +354,7 @@ body.sidebar-open {
 
 @media (max-width: 768px) {
     .page-header h1 {
+        padding: 40px 0;
         font-size: 1.8rem;
     }
 }
