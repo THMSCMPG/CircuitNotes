@@ -51,7 +51,7 @@ body.sidebar-open {
     position: fixed;
     top: 0;
     left: 0;
-    margin-bottom: 10 !important;
+    margin-bottom: 25 !important;
     z-index: 1000;
     padding: 0 !important;
     overflow: visible; /* Critical for dropdown visibility */
