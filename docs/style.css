@@ -331,8 +331,9 @@ body.sidebar-open {
    ============================================ */
 .page-header {
     background: var(--dark-muted) 100%;
+    color: white;
     padding: 0;
-    margin-top: 0 !important;
+    margin-top: 10 !important;
     border-bottom: 3px solid var(--primary);
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     text-align: center;
