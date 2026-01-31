@@ -51,7 +51,7 @@ body.sidebar-open {
     position: fixed;
     top: 0;
     left: 0;
-    margin-bottom: 100 !important;
+    margin-bottom: 52px !important;
     z-index: 1000;
     padding: 0 !important;
     overflow: visible; /* Critical for dropdown visibility */
@@ -333,7 +333,7 @@ body.sidebar-open {
     background: var(--dark-muted) 100%;
     color: white;
     padding: 0;
-    margin-top: 10 !important;
+    margin-top: 8px !important;
     border-bottom: 3px solid var(--primary);
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     text-align: center;
