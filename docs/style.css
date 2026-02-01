@@ -800,26 +800,6 @@ footer p {
     color: white;
 }
 
-.footer-social {
-    margin-top: 20px;
-}
-
-.footer-social a {
-    color: var(--text);
-    text-decoration: none;
-    margin: 0 15px;
-    transition: color 0.2s;
-    font-weight: 600;
-}
-
-.footer-social a:hover {
-    color: var(--primary);
-}
-
-.footer-social i {
-    margin-right: 5px;
-}
-
 /* ============================================
    CONTENT AREA
    ============================================ */
