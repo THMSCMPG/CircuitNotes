@@ -1,13 +1,14 @@
+# Site Metadata
 name: ""
-title: Thomas Campagna
+title: Thomas Campagna - CircuitNotes
 email: thmscmpgn@gmail.com
 description: >-
-  Undergraduate Physics & Math Student at Austin Peay State University. 
-  Aspiring Computational Physicist specializing in Photonics and Environmental Physics.
+  Comprehensive Arduino circuit documentation emphasizing physical intuition, 
+  reusable derivations, and practical circuit analysis.
 
 # Site Settings
 url: "https://THMSCMPG.github.io"
-baseurl: "/CircuitNotes"
+baseurl: "/CircuitNotes"  # Subfolder path
 
 # Build Settings
 markdown: kramdown
@@ -16,10 +17,15 @@ plugins:
   - jekyll-seo-tag
   - jekyll-remote-theme
 
-remote_theme: THMSCMPG/backend-hub
+# Remote Theme - ADD @main
+remote_theme: THMSCMPG/backend-hub@main
+
+# Sass Configuration
 sass:
   sass_dir: _sass
+  style: compressed
 
+# Kramdown Configuration
 kramdown:
   math_engine: mathjax
   input: GFM
