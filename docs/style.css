@@ -1,18 +1,17 @@
 /* Enhanced CSS - see fixed-files/style.css */
 :root {
-    --primary: #10b981; /* Emerald */
-    --primary-hover: #059669;
-    --dark: #0f172a; /* Slate 900 */
-    --dark-muted: #1e293b; /* Slate 800 */
-    --light: #f8fafc; /* Slate 50 */
-    --border: #e2e8f0; /* Slate 200 */
-    --text: #334155; /* Slate 700 */
-    --text-light: #64748b; /* Slate 500 */
-    --warning: #e74c3c; /* Alizarin Red */
-    --info: #3498db;    /* Peter River Blue */
-    --accent: #f39c12;  /* Orange */
-}
-
+            --primary: #10b981; /* Emerald */
+            --primary-hover: #059669;
+            --dark: #0f172a; /* Slate 900 */
+            --dark-muted: #1e293b; /* Slate 800 */
+            --light: #f8fafc; /* Slate 50 */
+            --border: #e2e8f0; /* Slate 200 */
+            --text: #334155; /* Slate 700 */
+            --text-light: #64748b; /* Slate 500 */
+            --warning: #e74c3c; /* Alizarin Red */
+            --info: #3498db;    /* Peter River Blue */
+            --accent: #f39c12;  /* Orange */
+        }
 /* ============================================
    BASE RESET & TYPOGRAPHY
    ============================================ */
@@ -785,7 +784,7 @@ tr:hover {
 }
             
 footer p {
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     color: inherit; /* Ensures it uses the muted slate color */
 }
             
