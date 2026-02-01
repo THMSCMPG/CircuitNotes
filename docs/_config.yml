@@ -1,34 +1,94 @@
+# =============================================================================
+# CIRCUITNOTES - Configuration
+# =============================================================================
+# Arduino circuit documentation site
+# URL: https://thmscmpg.github.io/CircuitNotes/
+# =============================================================================
+
 # Site Metadata
 name: ""
 title: Thomas Campagna - CircuitNotes
 email: thmscmpgn@gmail.com
 description: >-
   Comprehensive Arduino circuit documentation emphasizing physical intuition, 
-  reusable derivations, and practical circuit analysis.
+  reusable derivations, and practical circuit analysis. Learn electronics 
+  fundamentals with detailed theory and hands-on demonstrations.
+author: Thomas Campagna
+lang: en-US
+timezone: America/Chicago
 
-# Site Settings
+# Deployment Settings
 url: "https://THMSCMPG.github.io"
-baseurl: "/CircuitNotes"  # Subfolder path
+baseurl: "/CircuitNotes"
 
 # Build Settings
 markdown: kramdown
+highlighter: rouge
+permalink: pretty
+
+# Plugins
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-sitemap
   - jekyll-remote-theme
 
-# Remote Theme - ADD @main
+# Remote Theme Configuration
 remote_theme: THMSCMPG/backend-hub@main
 
 # Sass Configuration
 sass:
   sass_dir: _sass
   style: compressed
+  sourcemap: never
 
 # Kramdown Configuration
 kramdown:
   math_engine: mathjax
   input: GFM
   syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: true  # Show line numbers for code examples
 
+# SEO & Social
+social:
+  name: Thomas Campagna
+  links:
+    - https://github.com/THMSCMPG
+
+# Site Assets
 favicon: /assets/favicon.png
+
+# Collections (for future organization)
+# collections:
+#   circuits:
+#     output: true
+#     permalink: /circuits/:name/
+
+# Exclude from processing
+exclude:
+  - README.md
+  - LICENSE
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .git
+  - .gitignore
+  - .sass-cache
+  - package.json
+  - package-lock.json
+  - code/README.md  # Keep Arduino code but exclude its README
+
+# Include dotfiles (if needed)
+include:
+  - .well-known
+
+# Defaults for front matter
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "CircuitNotes"
+      author: "Thomas Campagna"
