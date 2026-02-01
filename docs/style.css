@@ -775,18 +775,29 @@ tr:hover {
 /* ============================================
    FOOTER
    ============================================ */
-.footer {
-    text-align: center;
-    padding: 60px 20px;
-    border-top: 1px solid var(--border);
-    color: var(--text-light);
-    font-size: 0.9rem;
-    background: white;
+.footer { 
+    text-align: center; 
+    padding: 60px 20px; 
+    background: var(--dark-muted); /* Dark background to match navbar */
+    color: #94a3b8;               /* Muted slate text */
     margin-top: 60px;
+    border-top: 3px solid var(--primary); /* Emerald accent line */
 }
-
-.footer p {
-    margin: 5px 0;
+            
+footer p {
+    margin-bottom: 8px;
+    color: inherit; /* Ensures it uses the muted slate color */
+}
+            
+.footer a {
+    color: var(--primary); /* Emerald links */
+    text-decoration: none;
+    font-weight: 600;
+}
+            
+.footer a:hover {
+    text-decoration: underline;
+    color: white;
 }
 
 .footer-social {
